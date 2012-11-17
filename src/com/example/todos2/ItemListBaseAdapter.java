@@ -1,10 +1,9 @@
 package com.example.todos2;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -13,13 +12,13 @@ import android.widget.TextView;
 public class ItemListBaseAdapter extends BaseAdapter
 {
 	private LayoutInflater l_Inflater;
-	private static ArrayList<ItemDetails>list_details;
+	private static ListController list_details;
 	static class ViewHolder
 	{
 	TextView txt_itemDescription;
 	Button btdDone;
 	}
-	public ItemListBaseAdapter(Context context, ArrayList<ItemDetails> results) {
+	public ItemListBaseAdapter(Context context, ListController results) {
 		list_details = results;
 		l_Inflater = LayoutInflater.from(context);
 	}
@@ -37,8 +36,18 @@ public class ItemListBaseAdapter extends BaseAdapter
 				else 
 				{
 					holder = (ViewHolder) convertView.getTag();
-				}	
+				}
+		
 		holder.txt_itemDescription.setText(list_details.get(position).getName());
+	 	holder.btdDone.setOnClickListener(new OnClickListener() {
+	 		
+	 		
+	        public void onClick(View v) {
+	           
+	        	list_details.deleteOrgan(position);
+	        	 notifyDataSetChanged();
+	        }
+	    });
 		return convertView;
 	}
 	public int getCount() {
@@ -51,4 +60,6 @@ public class ItemListBaseAdapter extends BaseAdapter
 	public long getItemId(int position) {
 		return position;
 	}
+
+
 }
