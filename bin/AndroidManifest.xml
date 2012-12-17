@@ -29,6 +29,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".ReminderBroadCastReciver">	
+		 <intent-filter>                
+				 <action android:name="com.r_.reminder_broadcast"/>
+		</intent-filter>	
+</receiver>
     </application>
 
 </manifest>

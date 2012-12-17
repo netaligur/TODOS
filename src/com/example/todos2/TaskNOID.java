@@ -11,11 +11,9 @@ public class TaskNOID extends  Activity
 
 	public void onCreate(Bundle savedInstanceState)
     {
-		ListController list_details=ListController.getInstance();
-		if (list_details.size()<1)
-		{
-		 list_details=GetSearchResults(list_details);
-		}
+		ListController list_details=ListController.getInstance(this);
+		list_details.boot();
+		//list_details.createTable();										// building the data base table
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_noid);
         Intent intent = getIntent();
@@ -45,69 +43,6 @@ public class TaskNOID extends  Activity
     	startActivity(intent);
     }
 
-    private ListController GetSearchResults(ListController list_details)
-    {
-    	
-    	ItemDetails item_details;
-    	item_details = new ItemDetails();
-    	item_details.setName("Adopt a Rat");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("Call Amnon");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("Go on Shopping");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("Eat Pizza");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("Make Pizza");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("Order Pizza");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("wash the Pizza");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("whatch the Pizza");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("give Pizza to Oozi");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("Oozi the king");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("Zuza rulls");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("Rat Rulls");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("Pizza");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("Rats are friends");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("remember the rat");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("iRat");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("IPizza");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("IPizza2");
-    	list_details.addOrgan(item_details);
-    	item_details = new ItemDetails();
-    	item_details.setName("PizzaMAN");
-    	list_details.addOrgan(item_details);
-
-    	return list_details;
-    }
+ 
 
 }

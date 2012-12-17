@@ -38,6 +38,7 @@ public final class R {
         public static final int button_create=0x7f040006;
         public static final int hello_world=0x7f040007;
         public static final int menu_settings=0x7f040001;
+        public static final int pick_time=0x7f040009;
         public static final int title_activity_create_task=0x7f040008;
         public static final int title_activity_task_noid=0x7f040002;
     }

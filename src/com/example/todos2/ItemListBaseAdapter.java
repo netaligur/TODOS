@@ -12,11 +12,11 @@ import android.widget.TextView;
 public class ItemListBaseAdapter extends BaseAdapter
 {
 	private LayoutInflater l_Inflater;
-	private static ListController list_details;
+	private  ListController list_details;
 	static class ViewHolder
 	{
-	TextView txt_itemDescription;
-	Button btdDone;
+		TextView txt_itemDescription;
+		Button btdDone;
 	}
 	public ItemListBaseAdapter(Context context, ListController results) {
 		list_details = results;

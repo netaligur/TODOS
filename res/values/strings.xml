@@ -9,5 +9,6 @@
     <string name="button_create">create</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_create_task">CreateTaskActivity</string>
+    <string name="pick_time">Select Time</string>
 
 </resources>
