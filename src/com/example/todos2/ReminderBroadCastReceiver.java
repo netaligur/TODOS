@@ -9,14 +9,30 @@ import android.content.Intent;
 
 public	class	ReminderBroadCastReceiver	extends	BroadcastReceiver	
 {	
-		public	void	onReceive(Context context,Intent intent)	
-		{	
-			/*//System.out.print("YYOYOYOYOYOY");
-			Intent	myIntent =	new	Intent(context,TaskNOID.class);	
-			PendingIntent pendingIntent	=	PendingIntent.getActivity(context,	0,	myIntent,	0);	
-			NotificationManager notificationManager	=(NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);									
-			Notification notification	=	new	Notification(R.drawable.ic_launcher,"Notification Ticker",System.currentTimeMillis());	
-			notification.setLatestEventInfo(context,"Notification Title","Notification Text",	pendingIntent);	
-			notificationManager.notify(0,	notification);	//0	is	id	*/
-		}	
+private NotificationManager notificationManager;
+	
+	
+	public void onReceive(Context context, Intent intent) 
+	{
+		
+		 String message  = intent.getStringExtra(CreateTaskActivity.EXTRA_MESSAGE);
+		
+		 notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+		 
+		 CharSequence from = " Thinking Of You!!";
+				  
+		 Intent intent2 = new Intent(context, TaskNOID.class);
+		 
+		 PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent2 , 0);
+ 
+		 Notification notif = new Notification(R.drawable.arik_rat,message, System.currentTimeMillis());
+		
+		 notif.setLatestEventInfo(context, from, message, contentIntent);
+		 
+		 notif.flags |= Notification.FLAG_AUTO_CANCEL;
+		 
+		 notificationManager.notify(0, notif);
+		 
+    }
+	
 }

@@ -1,18 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-      android:background="#E9967A"
-	android:orientation="horizontal" >
-	
-    <EditText android:id="@+id/edit_message"
-     android:layout_weight="1"
-     android:layout_width="0dp"
-     android:layout_height="wrap_content"
-     android:hint="@string/Description"  />
-<Button
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/images"
+    android:orientation="vertical" >
+
+    <Button
+       android:id="@+id/button_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_create" 
-        android:onClick="create" />
+        android:onClick="create"
+        android:text="@string/button_create" />
+
+    <EditText
+        android:id="@+id/edit_message"
+        android:layout_width="300dp"
+        android:layout_height="62dp"
+        android:ems="10"
+        android:hint="@string/Description" >
+    </EditText>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="remind me" />
+
+    <requestFocus />
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="125dp"
+        android:visibility="invisible" />
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="invisible" />
+
 </LinearLayout>

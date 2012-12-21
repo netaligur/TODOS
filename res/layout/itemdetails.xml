@@ -10,7 +10,8 @@
         android:textSize="30px"
 		android:textStyle="bold" 
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"       
+        android:layout_height="wrap_content" 
+        android:textColor="#20B2AA"      
         tools:context=".DisplayMessageActivity" />
     <Button
      android:id="@+id/btnDone"
@@ -20,10 +21,13 @@
      android:textSize="14sp" 
 	 android:textStyle="bold"
 	 android:layout_alignParentRight="true"
-     android:layout_marginLeft="4px"
-     android:layout_marginRight="10px"
+     android:layout_marginLeft="4dp"
+     android:layout_marginRight="10dp"
      android:typeface="monospace"
      android:onClick="done"
+     android:textColor="#20B2AA"  
+  
+   
        />
     
  </RelativeLayout>

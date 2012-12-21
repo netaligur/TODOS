@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:background="#E9967A"
+    android:background="#FFF5EE"
 	android:orientation="vertical" >
 
 
@@ -13,10 +13,14 @@
    	 android:onClick="addTask"
    	 android:textSize="14sp" 
 	android:textStyle="bold"
+	android:textColor="#20B2AA"
 	 />
  <ListView 
 
 	 android:layout_height="wrap_content"
+	 android:divider="#E9967A" 
+	  android:dividerHeight="4dp"
+	 
 	 android:layout_width="fill_parent" android:id="@+id/listV_main"/>
 
 </LinearLayout>
