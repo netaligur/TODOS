@@ -4,10 +4,9 @@ import java.util.LinkedList;
 
 import android.app.ListActivity;
 import android.content.Context;
-import android.database.Cursor;
+
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.util.Log;
+
 // SINGLETONE //
 public	class	ListController extends ListActivity
 {	
@@ -37,6 +36,7 @@ public static	ListController getInstance(Context context)
 }	
 public void boot()
 {
+	
 	list_details=db.getAllTasks();
 }
 
@@ -79,20 +79,17 @@ public static  boolean isOn()
 public void deleteOrgan (int index)
 {
 	
-	
-	 //String name=(list_details.get(index)).getName();
-		/* try {
-		        tasksDB.execSQL("DELETE FROM " +
-		             TABLE_NAME +
-		            "  WHERE Task="+name+";");
-		     }
-		     catch (SQLiteException se ) {
-		         Log.e(getClass().getSimpleName(), "Could not create records");
-		     }*/
-
 ItemDetails item=list_details.get(index);
 list_details.remove(index);
 
 db.deleteTask(item);
+}
+/*****/
+public void editOrgan (int index,ItemDetails newItem)
+{
+	
+
+list_details.add(index, newItem);
+db.updateTask(newItem);
 }
 }

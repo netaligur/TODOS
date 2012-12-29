@@ -16,7 +16,9 @@ public class ItemListBaseAdapter extends BaseAdapter
 	static class ViewHolder
 	{
 		TextView txt_itemDescription;
+		TextView txt_itemTopic;
 		Button btdDone;
+		Button btdEdit;
 	}
 	public ItemListBaseAdapter(Context context, ListController results) {
 		list_details = results;
@@ -30,7 +32,9 @@ public class ItemListBaseAdapter extends BaseAdapter
 					convertView = l_Inflater.inflate(R.layout.itemdetails, null);
 					holder = new ViewHolder();
 					holder.txt_itemDescription = (TextView) convertView.findViewById(R.id.text);
+					holder.txt_itemTopic = (TextView) convertView.findViewById(R.id.topic);
 					holder.btdDone = (Button)convertView.findViewById(R.id.btnDone);
+					holder.btdEdit = (Button)convertView.findViewById(R.id.btnEdit);
 					convertView.setTag(holder);
 				} 
 				else 
@@ -39,12 +43,24 @@ public class ItemListBaseAdapter extends BaseAdapter
 				}
 		
 		holder.txt_itemDescription.setText(list_details.get(position).getName());
-	 	holder.btdDone.setOnClickListener(new OnClickListener() {
+		holder.txt_itemTopic.setText(list_details.get(position).getTopic());
+	 	holder.btdDone.setOnClickListener(new OnClickListener()
+	 	{
 	 		
 	 		
 	        public void onClick(View v) {
 	           
 	        	list_details.deleteOrgan(position);
+	        	 notifyDataSetChanged();
+	        }
+	    });
+	 	holder.btdEdit.setOnClickListener(new OnClickListener()
+	 	{
+	 		
+	 		
+	        public void onClick(View v) {
+	           /*******/
+	        	
 	        	 notifyDataSetChanged();
 	        }
 	    });

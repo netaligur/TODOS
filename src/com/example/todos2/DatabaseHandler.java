@@ -1,8 +1,8 @@
 package com.example.todos2;
 
-import java.util.ArrayList;
+
 import java.util.LinkedList;
-import java.util.List;
+
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -18,14 +18,14 @@ public class DatabaseHandler extends SQLiteOpenHelper
     private static final int DATABASE_VERSION = 1;
  
     // Database Name
-    private static final String DATABASE_NAME = "tasksManager";
+    private static final String DATABASE_NAME = "taskManager3";
  
     // Contacts table name
-    private static final String TABLE_CONTACTS = "tasks";
+    private static final String TABLE_CONTACTS = "tasks2";
  
     // Contacts Table Columns names
     private static final String KEY_TASK = "task";
-
+    private static final String KEY_TOPIC = "topic";
  
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,7 +34,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("+ KEY_TASK + " TEXT"+")";
+        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("+ KEY_TASK + " TEXT,"+ KEY_TOPIC + " TEXT"+")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
  
@@ -55,6 +55,7 @@ public void addTask(ItemDetails item) {
  
     ContentValues values = new ContentValues();
     values.put(KEY_TASK, item.getName()); // task detail
+    values.put(KEY_TOPIC, item.getTopic()); // task detail
     
  
     // Inserting Row
@@ -67,14 +68,14 @@ public void addTask(ItemDetails item) {
 public ItemDetails getTask(String name) {
 SQLiteDatabase db = this.getReadableDatabase();
 
-Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_TASK,
-         }, KEY_TASK + "=?",
-        new String[] { name }, null, null, null, null);
+Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_TASK,KEY_TOPIC}, KEY_TASK + "=?",
+        new String[] { name }, null, null,null,null);
 if (cursor != null)
     cursor.moveToFirst();
 
 ItemDetails item = new ItemDetails();
 item.setName(cursor.getString(0));
+item.setTopic(cursor.getString(1));
 // return contact
 return item;
 }
@@ -93,6 +94,7 @@ if (cursor.moveToFirst()) {
     do {
         ItemDetails item = new ItemDetails ();
         item.setName(cursor.getString(0));
+        item.setTopic(cursor.getString(1));
     
         // Adding contact to list
       taskList.add(item);
@@ -119,17 +121,17 @@ SQLiteDatabase db = this.getWritableDatabase();
 
 ContentValues values = new ContentValues();
 values.put(KEY_TASK, item.getName());
+values.put(KEY_TOPIC, item.getTopic());
 
 // updating row
-return db.update(TABLE_CONTACTS, values, KEY_TASK + " = ?",
-        new String[] { item.getName() });
+return  db.update(TABLE_CONTACTS, values, KEY_TASK + " = ?",new String[] { item.getName() } );
+
 }
 
 // Deleting single contact
 public void deleteTask(ItemDetails item) {
 SQLiteDatabase db = this.getWritableDatabase();
-db.delete(TABLE_CONTACTS, KEY_TASK + " = ?",
-        new String[] { item.getName() });
+db.delete(TABLE_CONTACTS, KEY_TASK + " = ?", new String[] { item.getName() });
 db.close();
 }
 }

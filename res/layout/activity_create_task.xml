@@ -7,11 +7,26 @@
     android:orientation="vertical" >
 
     <Button
-       android:id="@+id/button_create"
+        android:id="@+id/button_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="create"
         android:text="@string/button_create" />
+
+    <Button
+        android:id="@+id/button_random"
+        android:layout_width="300dp"
+        android:layout_height="46dp"
+        android:onClick="random"
+        android:text="@string/button_random" />
+
+    <EditText
+        android:id="@+id/edit_topic"
+        android:layout_width="300dp"
+        android:layout_height="62dp"
+        android:ems="10"
+        android:hint="@string/Topic" >
+    </EditText>
 
     <EditText
         android:id="@+id/edit_message"
