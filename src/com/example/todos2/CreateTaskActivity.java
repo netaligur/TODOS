@@ -19,7 +19,8 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -70,6 +71,12 @@ private AlarmManager aManager;
     	aManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
     	editText=(EditText)findViewById(R.id.edit_message);
     	topicText=(EditText)findViewById(R.id.edit_topic);
+    	//topicText.setPaintFlags(topicText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+       /* Typeface font = Typeface.createFromAsset(this.getAssets(), "Bleeding_Cowboys.ttf‬"); 
+        create.setTypeface(font);
+        random.setTypeface(font);*/
+   
+         
     	
     }
     @Override
@@ -190,6 +197,7 @@ private AlarmManager aManager;
 						response+=line;
 					}
 					JSONObject jasonResponse = new JSONObject(response);
+					
 					
 					return jasonResponse.getString("description");
 				} 

@@ -1,6 +1,7 @@
 package com.example.todos2;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -9,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ItemListBaseAdapter extends BaseAdapter
+public class ItemListBaseAdapter extends BaseAdapter 
 {
 	private LayoutInflater l_Inflater;
 	private  ListController list_details;
@@ -17,7 +18,7 @@ public class ItemListBaseAdapter extends BaseAdapter
 	{
 		TextView txt_itemDescription;
 		TextView txt_itemTopic;
-		Button btdDone;
+		Button btdDelete;
 		Button btdEdit;
 	}
 	public ItemListBaseAdapter(Context context, ListController results) {
@@ -29,11 +30,14 @@ public class ItemListBaseAdapter extends BaseAdapter
 				if (convertView == null)
 				{
 					////////////////////////////////
+					
 					convertView = l_Inflater.inflate(R.layout.itemdetails, null);
 					holder = new ViewHolder();
 					holder.txt_itemDescription = (TextView) convertView.findViewById(R.id.text);
 					holder.txt_itemTopic = (TextView) convertView.findViewById(R.id.topic);
-					holder.btdDone = (Button)convertView.findViewById(R.id.btnDone);
+					//Typeface font = Typeface.createFromAsset(this.getAssets(), path);
+					//holder.txt_itemDescription.setTypeface(font);					
+					holder.btdDelete = (Button)convertView.findViewById(R.id.btnDelete);
 					holder.btdEdit = (Button)convertView.findViewById(R.id.btnEdit);
 					convertView.setTag(holder);
 				} 
@@ -44,7 +48,7 @@ public class ItemListBaseAdapter extends BaseAdapter
 		
 		holder.txt_itemDescription.setText(list_details.get(position).getName());
 		holder.txt_itemTopic.setText(list_details.get(position).getTopic());
-	 	holder.btdDone.setOnClickListener(new OnClickListener()
+	 	holder.btdDelete.setOnClickListener(new OnClickListener()
 	 	{
 	 		
 	 		

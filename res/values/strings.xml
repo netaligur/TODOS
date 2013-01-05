@@ -4,7 +4,7 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_task_noid">TaskNOID</string>
     <string name="button_Add">Add</string>
-    <string name="button_Done">Done</string>
+    <string name="button_Delete">Delete</string>
     <string name="Description">Description</string>
     <string name="button_create">create</string>
     <string name="hello_world">Hello world!</string>
@@ -13,5 +13,6 @@
     <string name="Topic">Topic</string>
     <string name="button_Edit">Edit</string>
     <string name="button_random">Random Task From The Web</string>
+    <string name="button_Done">Done</string>
 
 </resources>

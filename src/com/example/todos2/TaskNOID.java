@@ -32,13 +32,17 @@ public class TaskNOID extends  Activity
         ListView lv1 = (ListView) findViewById(R.id.listV_main);
         lv1.setAdapter(new ItemListBaseAdapter(this,  list_details));
         
+         // SharedPreferences preferences = getSharedPreferences(TaskNOID.ONE_TIME, 0);
+         //preferences.edit().remove("IsServiceRun").commit();
+        
         SharedPreferences settings = getSharedPreferences(TaskNOID.ONE_TIME, 0);
         
         boolean Servic_Up = settings.getBoolean("IsServiceRun", false);
-        if(!Servic_Up)
+        if(Servic_Up==false)
         {
          SetAlarmService();
         }
+        
        if (message!=null)
        {
     	   ItemDetails temp= new ItemDetails();
