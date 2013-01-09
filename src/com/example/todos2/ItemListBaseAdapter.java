@@ -1,7 +1,8 @@
 package com.example.todos2;
 
 import android.content.Context;
-import android.graphics.Typeface;
+import android.graphics.Paint;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +21,7 @@ public class ItemListBaseAdapter extends BaseAdapter
 		TextView txt_itemTopic;
 		Button btdDelete;
 		Button btdEdit;
+		Button btdDone;
 	}
 	public ItemListBaseAdapter(Context context, ListController results) {
 		list_details = results;
@@ -39,15 +41,28 @@ public class ItemListBaseAdapter extends BaseAdapter
 					//holder.txt_itemDescription.setTypeface(font);					
 					holder.btdDelete = (Button)convertView.findViewById(R.id.btnDelete);
 					holder.btdEdit = (Button)convertView.findViewById(R.id.btnEdit);
+					holder.btdDone = (Button)convertView.findViewById(R.id.btnDone);
 					convertView.setTag(holder);
 				} 
 				else 
 				{
 					holder = (ViewHolder) convertView.getTag();
 				}
-		
+		if (list_details.get(position).getDone()==0)
+		{
+		holder.txt_itemDescription.setPaintFlags( holder.txt_itemDescription.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
 		holder.txt_itemDescription.setText(list_details.get(position).getName());
+		holder.txt_itemTopic.setPaintFlags( holder.txt_itemTopic.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
 		holder.txt_itemTopic.setText(list_details.get(position).getTopic());
+		}
+		if (list_details.get(position).getDone()==1)
+		{
+			holder.txt_itemDescription.setText(list_details.get(position).getName());
+			holder.txt_itemDescription.setPaintFlags(holder.txt_itemDescription.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+			//holder.txt_itemDescription.setText(Html.fromHtml("This is <del>successed</del>."));
+			holder.txt_itemTopic.setText(list_details.get(position).getTopic());
+			holder.txt_itemTopic.setPaintFlags(holder.txt_itemTopic.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+		}
 	 	holder.btdDelete.setOnClickListener(new OnClickListener()
 	 	{
 	 		
@@ -60,12 +75,18 @@ public class ItemListBaseAdapter extends BaseAdapter
 	    });
 	 	holder.btdEdit.setOnClickListener(new OnClickListener()
 	 	{
-	 		
-	 		
 	        public void onClick(View v) {
 	           /*******/
 	        	
 	        	 notifyDataSetChanged();
+	        }
+	    });
+	 	holder.btdDone.setOnClickListener(new OnClickListener()
+	 	{	
+	        public void onClick(View v) {
+	        	
+	        	list_details.updateDone(position);
+	        	notifyDataSetChanged();
 	        }
 	    });
 		return convertView;

@@ -19,8 +19,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -121,6 +119,7 @@ private AlarmManager aManager;
 		ArrayList <String>  temp= new ArrayList<String>();
 		temp.add(0, result_text);
 		temp.add(1, topic_text);
+		
 		
 		intent.putStringArrayListExtra(EXTRA_MESSAGE,temp);	
 		if(checkBox.isChecked())

@@ -48,6 +48,7 @@ public class TaskNOID extends  Activity
     	   ItemDetails temp= new ItemDetails();
     	   temp.setName(message.get(0));
     	   temp.setTopic(message.get(1));
+    	   //temp.setDone(0);
     	   list_details.addOrgan(temp);
        }
 

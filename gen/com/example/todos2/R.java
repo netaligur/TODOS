@@ -21,8 +21,8 @@ public final class R {
     }
     public static final class id {
         public static final int btnDelete=0x7f070009;
-        public static final int btnEdit=0x7f07000c;
-        public static final int button1=0x7f07000b;
+        public static final int btnDone=0x7f07000c;
+        public static final int btnEdit=0x7f07000b;
         public static final int button_create=0x7f070000;
         public static final int button_random=0x7f070001;
         public static final int checkBox=0x7f070004;
