@@ -48,21 +48,35 @@ public class ItemListBaseAdapter extends BaseAdapter
 				{
 					holder = (ViewHolder) convertView.getTag();
 				}
+				String date;
+				date=" "+list_details.get(position).toString();
+	
+				
 		if (list_details.get(position).getDone()==0)
 		{
+		System.out.print(date);
+			if (list_details.get(position).getYear()!=0 && list_details.get(position).getMonth()!=0 && list_details.get(position).getDay()!=0)
+				holder.txt_itemDescription.setText(list_details.get(position).getName()+date);
+			
+			else
+				holder.txt_itemDescription.setText(list_details.get(position).getName());
 		holder.txt_itemDescription.setPaintFlags( holder.txt_itemDescription.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
-		holder.txt_itemDescription.setText(list_details.get(position).getName());
 		holder.txt_itemTopic.setPaintFlags( holder.txt_itemTopic.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
 		holder.txt_itemTopic.setText(list_details.get(position).getTopic());
 		}
 		if (list_details.get(position).getDone()==1)
 		{
-			holder.txt_itemDescription.setText(list_details.get(position).getName());
+			if (list_details.get(position).getYear()!=0 && list_details.get(position).getMonth()!=0 && list_details.get(position).getDay()!=0)
+				holder.txt_itemDescription.setText(list_details.get(position).getName()+date);
+			
+			else
+				holder.txt_itemDescription.setText(list_details.get(position).getName());
+			
 			holder.txt_itemDescription.setPaintFlags(holder.txt_itemDescription.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-			//holder.txt_itemDescription.setText(Html.fromHtml("This is <del>successed</del>."));
 			holder.txt_itemTopic.setText(list_details.get(position).getTopic());
 			holder.txt_itemTopic.setPaintFlags(holder.txt_itemTopic.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 		}
+		
 	 	holder.btdDelete.setOnClickListener(new OnClickListener()
 	 	{
 	 		

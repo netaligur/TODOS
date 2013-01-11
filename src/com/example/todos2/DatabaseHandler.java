@@ -15,7 +15,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 	 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 7;
   
     // Database Name
     private static final String DATABASE_NAME = "taskManager6";
@@ -28,6 +28,12 @@ public class DatabaseHandler extends SQLiteOpenHelper
     private static final String KEY_TOPIC = "topic";
     private static final String KEY_DONE = "done";
     private static final String KEY_ID = "id";
+    
+    private static final String KEY_YEAR = "year";
+    private static final String KEY_MONTH = "month";
+    private static final String KEY_DAY = "day";
+    private static final String KEY_HOUR = "hour";
+    private static final String KEY_MINUTE = "minute";
  
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -38,7 +44,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
 	// Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("+ KEY_TASK + " TEXT,"+ KEY_TOPIC + " TEXT,"+ KEY_DONE+" TEXT,"+KEY_ID+" TEXT"+")";
+        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("+ KEY_TASK + " TEXT,"+ KEY_TOPIC + " TEXT,"+ KEY_DONE+" TEXT,"+KEY_ID+" TEXT,"+KEY_YEAR+" INT,"+KEY_MONTH+" INT,"+KEY_DAY+" INT,"+KEY_HOUR+" INT,"+KEY_MINUTE+" INT"+")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
  
@@ -62,7 +68,12 @@ public void addTask(ItemDetails item) {
     values.put(KEY_TOPIC, item.getTopic()); // topic detail
     values.put(KEY_DONE, String.valueOf(item.getDone()));
     values.put(KEY_ID, String.valueOf(item.getId()));
-   
+    values.put(KEY_YEAR, item.getYear());
+    values.put(KEY_MONTH,item.getMonth());
+    values.put(KEY_DAY, item.getDay());
+    values.put(KEY_HOUR,item.getHour());
+    values.put(KEY_MINUTE,item.getMinute());
+  // System.out.println("in add task"+item.getTopic()+item.toString());
     
  
     // Inserting Row
@@ -76,7 +87,7 @@ public void addTask(ItemDetails item) {
 public ItemDetails getTask(String name) {
 SQLiteDatabase db = this.getReadableDatabase();
 
-Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_TASK,KEY_TOPIC,KEY_DONE,KEY_ID}, KEY_TASK + "=?",
+Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_TASK,KEY_TOPIC,KEY_DONE,KEY_ID,KEY_YEAR,KEY_MONTH,KEY_DAY,KEY_HOUR,KEY_MINUTE}, KEY_TASK + "=?",
         new String[] { name }, null, null,null,null);
 if (cursor != null)
     cursor.moveToFirst();
@@ -85,6 +96,12 @@ ItemDetails item = new ItemDetails();
 item.setName(cursor.getString(0));
 item.setTopic(cursor.getString(1));
 item.setDone(Integer.parseInt(cursor.getString(2)));
+item.setId(Integer.parseInt(cursor.getString(3)));
+item.setYear(Integer.parseInt(cursor.getString(4)));
+item.setMonth(Integer.parseInt(cursor.getString(5)));
+item.setDay(Integer.parseInt(cursor.getString(6)));
+item.setHour(Integer.parseInt(cursor.getString(7)));
+item.setMinute(Integer.parseInt(cursor.getString(8)));
 // return contact
 cursor.close();
 return item;
@@ -108,7 +125,13 @@ if (cursor.moveToFirst()) {
         item.setTopic(cursor.getString(1));
         item.setDone(Integer.parseInt(cursor.getString(2)));
         item.setId(Integer.parseInt(cursor.getString(3)));
-        System.out.println(item.getTopic()+","+item.getDone());
+        item.setYear(Integer.parseInt(cursor.getString(4)));
+        item.setMonth(Integer.parseInt(cursor.getString(5)));
+        item.setDay(Integer.parseInt(cursor.getString(6)));
+        item.setHour(Integer.parseInt(cursor.getString(7)));
+        item.setMinute(Integer.parseInt(cursor.getString(8)));
+    //   System.out.println("");
+    //  System.out.println("from the db!!!"+ item.getTopic()+item.toString());
         // Adding contact to list
       taskList.add(item);
      
@@ -139,6 +162,12 @@ values.put(KEY_TASK, item.getName());
 values.put(KEY_TOPIC, item.getTopic());
 values.put(KEY_DONE, String.valueOf(item.getDone()));
 values.put(KEY_ID, String.valueOf(item.getId()));
+values.put(KEY_YEAR, item.getYear());
+values.put(KEY_MONTH,item.getMonth());
+values.put(KEY_DAY, item.getDay());
+values.put(KEY_HOUR,item.getHour());
+values.put(KEY_MINUTE,item.getMinute());
+
 
 // updating row
 return  db.update(TABLE_CONTACTS, values, KEY_ID + " = ?",new String[] {String.valueOf(item.getId()) } );

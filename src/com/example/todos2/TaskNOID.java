@@ -49,7 +49,14 @@ public class TaskNOID extends  Activity
     	   temp.setName(message.get(0));
     	   temp.setTopic(message.get(1));
     	   //temp.setDone(0);
+    	   
+    	   temp.setYear(Integer.valueOf(message.get(2)));
+    	   temp.setMonth(Integer.valueOf(message.get(3)));
+    	   temp.setDay(Integer.valueOf(message.get(4)));
+    	   temp.setHour(Integer.valueOf(message.get(5)));
+    	   temp.setMinute(Integer.valueOf(message.get(6)));
     	   list_details.addOrgan(temp);
+    	   System.out.println(temp.toString());
        }
 
     }

@@ -59,6 +59,7 @@ public void addOrgan(ItemDetails item)
 	//String name=item.getName();
 	item.setDone(0);
 	list_details.addFirst(item);
+	System.out.println(item.getTopic()+item.toString());
 	db.addTask(new ItemDetails(item));
 }
 public ItemDetails get(int position)

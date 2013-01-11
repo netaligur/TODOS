@@ -117,21 +117,28 @@ private AlarmManager aManager;
 		//topicText=(EditText)findViewById(R.id.edit_topic);
 		String topic_text=topicText.getText().toString();
 		ArrayList <String>  temp= new ArrayList<String>();
-		temp.add(0, result_text);
-		temp.add(1, topic_text);
 		
-		
-		intent.putStringArrayListExtra(EXTRA_MESSAGE,temp);	
 		if(checkBox.isChecked())
 		{
 			hour = timePicker.getCurrentHour();
 			minute=timePicker.getCurrentMinute();
 			year = datePicker.getYear();
-			month = datePicker.getMonth();
+			month = datePicker.getMonth()+1;
 			day = datePicker.getDayOfMonth();
 			
 			setTimeAlarm();	
-			}
+		}
+		temp.add(0, result_text);
+		temp.add(1, topic_text);
+		temp.add(2,String.valueOf(year));
+		temp.add(3,String.valueOf(month));
+		temp.add(4,String.valueOf(day));
+		temp.add(5,String.valueOf(hour));
+		temp.add(6,String.valueOf(minute));
+		
+		
+		
+		intent.putStringArrayListExtra(EXTRA_MESSAGE,temp);	
 		startActivity(intent);
 		}
 	}

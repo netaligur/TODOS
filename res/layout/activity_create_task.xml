@@ -1,60 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/images"
-    android:orientation="vertical" >
+<ScrollView
+      xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
 
-    <Button
-        android:id="@+id/button_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="create"
-        android:text="@string/button_create" />
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="500dp"
+        android:background="@drawable/images"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/button_random"
-        android:layout_width="300dp"
-        android:layout_height="46dp"
-        android:onClick="random"
-        android:text="@string/button_random" />
+        <Button
+            android:id="@+id/button_create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="create"
+            android:text="@string/button_create" />
 
-    <EditText
-        android:id="@+id/edit_topic"
-        android:layout_width="300dp"
-        android:layout_height="62dp"
-        android:ems="10"
-        android:hint="@string/Topic" >
-    </EditText>
+        <Button
+            android:id="@+id/button_random"
+            android:layout_width="300dp"
+            android:layout_height="46dp"
+            android:onClick="random"
+            android:text="@string/button_random" />
 
-    <EditText
-        android:id="@+id/edit_message"
-        android:layout_width="300dp"
-        android:layout_height="62dp"
-        android:ems="10"
-        android:hint="@string/Description" >
-    </EditText>
+        <EditText
+            android:id="@+id/edit_topic"
+            android:layout_width="300dp"
+            android:layout_height="62dp"
+            android:ems="10"
+            android:hint="@string/Topic" >
+        </EditText>
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="remind me" />
+        <EditText
+            android:id="@+id/edit_message"
+            android:layout_width="300dp"
+            android:layout_height="62dp"
+            android:ems="10"
+            android:hint="@string/Description" >
+        </EditText>
 
-    <requestFocus />
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="remind me" />
 
-    <TimePicker
-        android:id="@+id/timePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="125dp"
-        android:visibility="invisible" />
+        <requestFocus />
 
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:visibility="invisible" />
+        <TimePicker
+            android:id="@+id/timePicker"
+            android:layout_width="296dp"
+            android:layout_height="74dp"
+            android:layout_weight="0.04"
+            android:visibility="invisible" />
 
-</LinearLayout>
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+</ScrollView>
