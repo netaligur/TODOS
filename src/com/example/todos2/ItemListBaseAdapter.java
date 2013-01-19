@@ -1,6 +1,9 @@
 package com.example.todos2;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -9,38 +12,145 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.content.DialogInterface;
 
 public class ItemListBaseAdapter extends BaseAdapter 
 {
 	private LayoutInflater l_Inflater;
 	private  ListController list_details;
+	private Context context;
 	static class ViewHolder
 	{
 		TextView txt_itemDescription;
 		TextView txt_itemTopic;
 		Button btdDelete;
-		Button btdEdit;
+		//Button btdEdit;
 		Button btdDone;
 	}
 	public ItemListBaseAdapter(Context context, ListController results) {
 		list_details = results;
 		l_Inflater = LayoutInflater.from(context);
+		this.context=context;
+		
+	
+		
 	}
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
+		
 				if (convertView == null)
 				{
 					////////////////////////////////
 					
 					convertView = l_Inflater.inflate(R.layout.itemdetails, null);
+					convertView.setClickable(true);
+				    convertView.setOnClickListener(new OnClickListener() {//open dialog when clicking a list item
+				                    public void onClick(View paramView)
+				                    {
+				                    	
+				                    	
+				                    					
+				                			AlertDialog dialogBox = OptionsDialogBox(list_details.get(position),paramView);
+				                			//System.out.println("good");
+				                			dialogBox.show();
+				                		
+				                	}
+				                		
+				                		public AlertDialog OptionsDialogBox(final ItemDetails it, final View v)
+				                		{
+				                			final CharSequence[] options = {"Edit Task","Show Task Details","Mark Me As Important"};
+				                			
+				                			AlertDialog IntervalAlarmChoice = new AlertDialog.Builder(context).setTitle(R.string.task_menu).setItems(options, new DialogInterface.OnClickListener()
+				                			    {
+				                			        public void onClick(DialogInterface dialog, int which) 
+				                			        {
+				                			        	if(options[which]=="Edit Task")
+				                			        	{
+				                			        		/*db.open();
+				                			        		db.deleteTask(it);
+				                			        		db.close();
+				                			        		databasesingleton.getArrayList().remove(it);
+				                			        		adapter .notifyDataSetChanged();
+				                			        		Intent intent = new Intent(getApplicationContext(), TimeNotification.class);
+				                			        		PendingIntent.getBroadcast(getApplicationContext(), it.getId(), intent,PendingIntent.FLAG_UPDATE_CURRENT).cancel();*/
+				                			        	}
+				                			        	
+				                			        	
+				                			        	if(options[which]=="Mark Me As Important"){
+				                			        		
+				                			        		//showDialog(it.getId());
+				                			        		}
+				                			        	if(options[which]=="Show Task Details"){
+				                			        		
+				                			        		//TextView info = (TextView)v.findViewById(R.id.info);
+				                			        		//info.setVisibility(0);
+				                			        	}
+				                			        }
+				                			    })
+				                			    .create();   
+				                		        return IntervalAlarmChoice;
+				                		}
+				                		
+				    
+				                	    protected Dialog onCreateDialog(final int id)
+				                		{
+											return null;
+				                	       /*  LayoutInflater factory = LayoutInflater.from(context);
+				                	         final View textEntryView = factory.inflate(R.layout.edititemmenu, null);
+				                	          return new AlertDialog.Builder(TaskListActivity.this).setTitle("Set Item").setView(textEntryView).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+				                	                    public void onClick(DialogInterface dialog, int whichButton) {
+				                	                    	
+				                	                    	EditText etTitle = (EditText)textEntryView.findViewById(R.id.etTitle);
+				                	                    	EditText etDescription = (EditText)textEntryView.findViewById(R.id.etDescription);
+				                	                    	EditText etLocation = (EditText)textEntryView.findViewById(R.id.etLocation);
+				                	                    	title = etTitle.getText().toString();
+				                	                    	description = etDescription.getText().toString();
+				                	                    	
+				                	                    	setEditTask(id,title,description);
+				                	                    }
+
+				                						private void setEditTask(int id, String title,String description) 
+				                						{
+				                							db.open();
+				                		        			db.updateTask(id, title, description);
+				                		        			db.close();
+				                		        			for(int i=0;i<databasesingleton.getArrayList().size();i++){
+				                		        				
+				                		        				if(databasesingleton.getArrayList().get(i).getId() == id){
+				                		        					
+				                		        					databasesingleton.getArrayList().get(i).setItemDescription(title);
+				                				        			databasesingleton.getArrayList().get(i).setDescription(description);
+				                					        		adapter .notifyDataSetChanged();
+				                				        			break;
+				                		        				}
+				                		        				
+				                		        			}
+				                		        			
+
+				                						}
+				                	                })
+				                	                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+				                	                    public void onClick(DialogInterface dialog, int whichButton) {
+
+				                	                      dialog.dismiss();
+				                	                    }
+				                	                })
+				                	                .create();
+				                	        }
+				                		*/
+				                    }
+				                    });
 					holder = new ViewHolder();
 					holder.txt_itemDescription = (TextView) convertView.findViewById(R.id.text);
 					holder.txt_itemTopic = (TextView) convertView.findViewById(R.id.topic);
 					//Typeface font = Typeface.createFromAsset(this.getAssets(), path);
 					//holder.txt_itemDescription.setTypeface(font);					
 					holder.btdDelete = (Button)convertView.findViewById(R.id.btnDelete);
-					holder.btdEdit = (Button)convertView.findViewById(R.id.btnEdit);
+					//holder.btdEdit = (Button)convertView.findViewById(R.id.btnEdit);
 					holder.btdDone = (Button)convertView.findViewById(R.id.btnDone);
 					convertView.setTag(holder);
 				} 
@@ -87,14 +197,7 @@ public class ItemListBaseAdapter extends BaseAdapter
 	        	 notifyDataSetChanged();
 	        }
 	    });
-	 	holder.btdEdit.setOnClickListener(new OnClickListener()
-	 	{
-	        public void onClick(View v) {
-	           /*******/
-	        	
-	        	 notifyDataSetChanged();
-	        }
-	    });
+	 
 	 	holder.btdDone.setOnClickListener(new OnClickListener()
 	 	{	
 	        public void onClick(View v) {
@@ -105,6 +208,7 @@ public class ItemListBaseAdapter extends BaseAdapter
 	    });
 		return convertView;
 	}
+
 	public int getCount() {
 		return list_details.size();
 		

@@ -16,33 +16,43 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.text.format.DateFormat;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 public class CreateTaskActivity extends Activity  implements OnClickListener, OnCheckedChangeListener 
 {
-
+private TextView timeLabel;
+private CheckBox pickTime;
 private Button create;
 private Button random;
 private EditText editText;
 private EditText topicText;
-private TimePicker timePicker;
-private DatePicker datePicker;
+//private TimePicker timePicker;
+//private DatePicker datePicker;
 private CheckBox checkBox;
 private int hour;
 private int minute;
@@ -50,22 +60,28 @@ private int year;
 private int month;
 private int day;
 private AlarmManager aManager;
+private boolean flagAlarm=false;
 
 	 public final static String EXTRA_MESSAGE = "com.example.todos2.TaskNOID";
     @Override
-    public void onCreate(Bundle savedInstanceState)
+   public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
+        timeLabel=(TextView)findViewById(R.id.show_date1);
+        timeLabel.setText("no date entered");
+        timeLabel.setTextColor(Color.RED);
+        pickTime= (CheckBox)findViewById(R.id.box_pick_time);
+        pickTime.setOnCheckedChangeListener(this);
         create= (Button)findViewById(R.id.button_create);
     	create.setOnClickListener(this);
     	random= (Button)findViewById(R.id.button_random);
     	random.setOnClickListener(this);
-    	timePicker=(TimePicker)findViewById (R.id.timePicker);
-    	datePicker = (DatePicker)findViewById(R.id.datePicker);
+    	//timePicker=(TimePicker)findViewById (R.id.timePicker);
+    	//datePicker = (DatePicker)findViewById(R.id.datePicker);
     	checkBox = (CheckBox)findViewById(R.id.checkBox);
     	checkBox.setOnCheckedChangeListener(this);
-    	timePicker.setIs24HourView(true);
+    	//timePicker.setIs24HourView(true);
     	aManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
     	editText=(EditText)findViewById(R.id.edit_message);
     	topicText=(EditText)findViewById(R.id.edit_topic);
@@ -73,8 +89,24 @@ private AlarmManager aManager;
        /* Typeface font = Typeface.createFromAsset(this.getAssets(), "Bleeding_Cowboys.ttf‬"); 
         create.setTypeface(font);
         random.setTypeface(font);*/
-   
-         
+    	 Intent intent = getIntent();
+    	  ArrayList<String>message = intent.getStringArrayListExtra(CreateTaskActivity.EXTRA_MESSAGE);
+    	   if (message!=null)
+           {
+        	   ItemDetails temp= new ItemDetails();
+        	   temp.setName(message.get(0));
+        	   temp.setTopic(message.get(1));
+        	   //temp.setDone(0);        	   
+        	/*   temp.setYear(Integer.valueOf(message.get(2)));
+        	   temp.setMonth(Integer.valueOf(message.get(3)));
+        	   temp.setDay(Integer.valueOf(message.get(4)));
+        	   temp.setHour(Integer.valueOf(message.get(5)));
+        	   temp.setMinute(Integer.valueOf(message.get(6)));*/
+        	   System.out.println(temp.toString());       	   
+        	   editText.setText(temp.getName());
+        	   topicText.setText(temp.getTopic());   
+           } 
+    	  
     	
     }
     @Override
@@ -107,6 +139,15 @@ private AlarmManager aManager;
 					e.printStackTrace();
 				}
 			}
+	/*	if (v.getId()==R.id.button_pick_time)
+		{
+			DatePickerFragment dPick= new DatePickerFragment();
+			dPick.show(getFragmentManager(), "Select the Date");
+			TimePickerFragment tPick =new TimePickerFragment();
+			tPick.show(getFragmentManager(), "Select the Time");
+			flagAlarm=true;
+			
+		}*/
 			
 		if (v.getId()==R.id.button_create)
 		{
@@ -117,16 +158,25 @@ private AlarmManager aManager;
 		//topicText=(EditText)findViewById(R.id.edit_topic);
 		String topic_text=topicText.getText().toString();
 		ArrayList <String>  temp= new ArrayList<String>();
-		
-		if(checkBox.isChecked())
+	/* *****************check box in the future******(repeated tasks!!!!)*************************/	
+		/*if(checkBox.isChecked())
 		{
 			hour = timePicker.getCurrentHour();
 			minute=timePicker.getCurrentMinute();
 			year = datePicker.getYear();
 			month = datePicker.getMonth()+1;
-			day = datePicker.getDayOfMonth();
-			
+			day = datePicker.getDayOfMonth();		
+		
 			setTimeAlarm();	
+		}*/
+		
+		
+		
+		if (flagAlarm==true)
+		{
+			setTimeAlarm();	
+			flagAlarm=false;
+			
 		}
 		temp.add(0, result_text);
 		temp.add(1, topic_text);
@@ -153,7 +203,7 @@ private AlarmManager aManager;
 			  
 			  Calendar cal = Calendar.getInstance();
 			  
-			  cal.set(year, month, day, hour, minute);
+			  cal.set(year, month-1, day, hour, minute);
 			  
 			  aManager.set(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(), pendingIntent);
 			  
@@ -161,10 +211,10 @@ private AlarmManager aManager;
 			  toast.show();
 			
 		}
-
+		/* *****************check box in the future (repeated tasks!!!!)*******************************/	
 		public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 			 
-			if(arg1)
+			/*if(arg1)
 			{
 				timePicker.setVisibility(View.VISIBLE);
 				datePicker.setVisibility(View.VISIBLE);
@@ -173,8 +223,29 @@ private AlarmManager aManager;
 			{
 				timePicker.setVisibility(View.INVISIBLE);
 				datePicker.setVisibility(View.INVISIBLE);
+				
+			}*/
+			if((arg1)&&(arg0==pickTime))// (pickTime.isChecked())&&checkBox.isChecked()==false)
+			{
+				DatePickerFragment dPick= new DatePickerFragment();
+				dPick.show(getFragmentManager(), "Select the Date");
+				TimePickerFragment tPick =new TimePickerFragment();
+				tPick.show(getFragmentManager(), "Select the Time");
+				flagAlarm=true;									
 			}
+			else if(arg0==pickTime)
+			{   
+				flagAlarm=false;
+				timeLabel.setText("no date entered");
+		        timeLabel.setTextColor(Color.RED);
+		        year=0;
+		        month=0;
+		        day=0;
+		        hour=0;
+		        minute=0;
+		     }
 		}
+	
 		private class GetFromWebTask extends AsyncTask<URL, Integer , String>
 		{
 			@Override
@@ -226,7 +297,54 @@ private AlarmManager aManager;
 				
 			}
 		}
+		public  class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener
+		{
 
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+		// Use the current time as the default values for the picker
+		final Calendar c = Calendar.getInstance();
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		int minute = c.get(Calendar.MINUTE);
+		
+		// Create a new instance of TimePickerDialog and return it
+		return new TimePickerDialog(getActivity(), this, hour, minute,
+		DateFormat.is24HourFormat(getActivity()));
+		}
+
+			public void onTimeSet(TimePicker view, int hourOfDay, int minute1)
+			{
+				hour=hourOfDay;
+				minute=minute1;
+			}
+		}
+		public  class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
+		{
+
+			@Override
+			public Dialog onCreateDialog(Bundle savedInstanceState)
+			{
+			// Use the current date as the default date in the picker
+			final Calendar c = Calendar.getInstance();
+			int year = c.get(Calendar.YEAR);
+			int month = c.get(Calendar.MONTH);
+			int day = c.get(Calendar.DAY_OF_MONTH);
+			
+			// Create a new instance of DatePickerDialog and return it
+			return new DatePickerDialog(getActivity(), this, year, month, day);
+			}
+			
+				public void onDateSet(DatePicker view, int year1, int month1, int day1) 
+				{
+					year=year1;
+					month=month1+1;
+					day=day1;
+					timeLabel.setText( + day + "/" + month + "/"+ year + ",At  " + hour + ":" + minute);
+			        timeLabel.setTextColor(Color.BLUE);
+				}
+		}
+	
+		
 	}
 
 	

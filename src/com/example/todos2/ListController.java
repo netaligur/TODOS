@@ -16,6 +16,8 @@ private Context context;
 private	static	ListController	instance	=	null;
 private static DatabaseHandler db =null;
   SQLiteDatabase tasksDB = null;
+  private boolean edit=false;
+  private int index;
 //private	Context context;	
 private static  LinkedList <ItemDetails>list_details;
 private	ListController(Context context)
@@ -88,13 +90,29 @@ list_details.remove(index);
 db.deleteTask(item);
 }
 /*****/
-public void editOrgan (int index,ItemDetails newItem)
+public void editOrgan (int index)
 {
-	
+	edit=true;
+	this.index=index;
 
-list_details.add(index, newItem);
-db.updateTask(newItem);
+
 }
+public boolean isEdit() {
+	return edit;
+}
+
+public void setEdit(boolean edit) {
+	this.edit = edit;
+}
+
+public int getIndex() {
+	return index;
+}
+
+public void setIndex(int index) {
+	this.index = index;
+}
+
 public void updateDone (int index)
 {
 	ItemDetails temp;

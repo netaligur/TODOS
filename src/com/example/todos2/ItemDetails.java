@@ -12,6 +12,7 @@ public class ItemDetails
 	private int day;
 	private int hour;
 	private int minute;
+
 	
 	
 	public int getYear() {
@@ -118,5 +119,6 @@ public class ItemDetails
 	{
 		this.description = descriptionName;
 	}
+	
 	
 }

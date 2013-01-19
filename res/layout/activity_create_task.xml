@@ -2,7 +2,8 @@
 <ScrollView
       xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
+  android:layout_height="fill_parent"
+  android:visibility="visible">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,7 +15,7 @@
 
         <Button
             android:id="@+id/button_create"
-            android:layout_width="wrap_content"
+            android:layout_width="292dp"
             android:layout_height="wrap_content"
             android:onClick="create"
             android:text="@string/button_create" />
@@ -25,6 +26,29 @@
             android:layout_height="46dp"
             android:onClick="random"
             android:text="@string/button_random" />
+
+        <CheckBox
+            android:id="@+id/box_pick_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pick_time"/>
+        <TextView
+	         android:id="@+id/show_date1"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_alignParentLeft="true"
+	    	 android:layout_marginTop="0dp"
+	         android:textColor="#20B2AA"
+	         android:textSize="14dp"
+	         android:textStyle="bold"
+	         android:typeface="serif"
+	          />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="repeat at" />
 
         <EditText
             android:id="@+id/edit_topic"
@@ -41,28 +65,12 @@
             android:ems="10"
             android:hint="@string/Description" >
         </EditText>
-
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="remind me" />
+	
+		 
 
         <requestFocus />
 
-        <TimePicker
-            android:id="@+id/timePicker"
-            android:layout_width="296dp"
-            android:layout_height="74dp"
-            android:layout_weight="0.04"
-            android:visibility="invisible" />
-
-        <DatePicker
-            android:id="@+id/datePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:visibility="invisible" />
+      
     </LinearLayout>
 
 </ScrollView>

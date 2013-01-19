@@ -7,31 +7,54 @@ import java.util.Calendar;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ListActivity;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
-public class TaskNOID extends  Activity
+public class TaskNOID extends Activity implements View.OnClickListener
 {   
+	private Context context;
 	public static final String ONE_TIME = "";
 	private Intent alarm;
+	private ListController list_details;
+	public final static String EXTRA_MESSAGE = "com.example.todos2.CreateTaskActivity";
 	public void onCreate(Bundle savedInstanceState)
     {
-		ListController list_details=ListController.getInstance(this);
+		list_details=ListController.getInstance(this);
 		list_details.boot();
 		//list_details.createTable();										// building the data base table
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_noid);
         Intent intent = getIntent();
         ArrayList<String>message = intent.getStringArrayListExtra(CreateTaskActivity.EXTRA_MESSAGE);
-
-        ListView lv1 = (ListView) findViewById(R.id.listV_main);
+        context=this;
+        ListView lv1 = (ListView) findViewById(R.id.list);
         lv1.setAdapter(new ItemListBaseAdapter(this,  list_details));
+        lv1.setItemsCanFocus(false);
+        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener()
+		{
         
+        public void onItemClick(AdapterView<?> parent, View view, int position,long id)
+		{				
+			System.out.println("netali");
+
+                
+                String item ;//((TextView)view).getText().toString();
+                
+                Toast.makeText(getBaseContext(), "good", Toast.LENGTH_LONG).show();
+		}});
+	
          // SharedPreferences preferences = getSharedPreferences(TaskNOID.ONE_TIME, 0);
          //preferences.edit().remove("IsServiceRun").commit();
         
@@ -42,7 +65,7 @@ public class TaskNOID extends  Activity
         {
          SetAlarmService();
         }
-        
+     
        if (message!=null)
        {
     	   ItemDetails temp= new ItemDetails();
@@ -58,6 +81,7 @@ public class TaskNOID extends  Activity
     	   list_details.addOrgan(temp);
     	   System.out.println(temp.toString());
        }
+    
 
     }
 
@@ -73,6 +97,7 @@ public class TaskNOID extends  Activity
     	startActivity(intent);
     }
 
+  
 	private void SetAlarmService()
 	{
         alarm = new Intent(this,ServiceFromBroadcast.class);
@@ -88,6 +113,21 @@ public class TaskNOID extends  Activity
         editor.putBoolean("IsServiceRun",true);
         editor.commit();
         Toast.makeText(this, "service is up ", Toast.LENGTH_SHORT).show();
-	} 
+	}
+			
+	
+
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+
+        String item ;//((TextView)view).getText().toString();
+        
+        Toast.makeText(getBaseContext(), "good", Toast.LENGTH_LONG).show();
+	}
 
 }
+	
+
+	
+
+

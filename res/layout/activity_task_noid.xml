@@ -7,23 +7,22 @@
 	android:orientation="vertical" 
 	>
 
- <Button
-     android:layout_width="68dp"
-     android:layout_height="50dp"
-     android:background="@drawable/add_b"
-     android:onClick="addTask"
-     android:textColor="#20B2AA"
-     android:textSize="14sp"
-     android:textStyle="bold" />
+    <Button
+        android:layout_width="117dp"
+        android:layout_height="50dp"
+        android:background="@drawable/add_b"
+        android:onClick="addTask"
+        android:textColor="#20B2AA"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
  <ListView 
-
-	 android:layout_height="wrap_content"
+    android:id="@+id/list"
+	 android:layout_height="fill_parent"
 	 android:divider="#E9967A" 
-	  android:dividerHeight="4dp"
-	  
-	 
-	 android:layout_width="fill_parent" android:id="@+id/listV_main"/>
+	 android:dividerHeight="4dp"
+	 android:layout_width="fill_parent" 
+	/>
 
 </LinearLayout>
 

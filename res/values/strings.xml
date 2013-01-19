@@ -14,5 +14,11 @@
     <string name="button_Edit">Edit</string>
     <string name="button_random">Random Task From The Web</string>
     <string name="button_Done">Done</string>
+    <string name="title_activity_opening">OpeningActivity</string>
+    <string name="task_menu">Task Menu</string>
+	
+
+
+
 
 </resources>

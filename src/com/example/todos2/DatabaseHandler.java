@@ -104,8 +104,7 @@ item.setHour(Integer.parseInt(cursor.getString(7)));
 item.setMinute(Integer.parseInt(cursor.getString(8)));
 // return contact
 cursor.close();
-return item;
-}
+return item;}
 
 // Getting All Contacts
 public LinkedList<ItemDetails> getAllTasks() {

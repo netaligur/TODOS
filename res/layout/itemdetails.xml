@@ -5,6 +5,8 @@
      android:orientation="horizontal" >
 
      <TextView
+         android:focusable="false"
+		 android:focusableInTouchMode="false"
          android:id="@+id/topic"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
@@ -23,7 +25,6 @@
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignParentRight="true"
-         android:layout_marginLeft="4dp"
          android:layout_marginRight="10dp"
          android:onClick="done"
          android:text="@string/button_Delete"
@@ -33,6 +34,8 @@
          android:typeface="monospace" />
 
      <TextView
+         android:focusable="false"
+		 android:focusableInTouchMode="false"
          android:id="@+id/text"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
@@ -46,25 +49,11 @@
          tools:context=".DisplayMessageActivity" />
 
      <Button
-         android:id="@+id/btnEdit"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_above="@+id/topic"
-         android:layout_toLeftOf="@+id/btnDelete"
-         android:onClick="done"
-         android:text="@string/button_Edit"
-         android:textColor="#20B2AA"
-         android:textSize="14sp"
-         android:textStyle="bold"
-         android:typeface="monospace" />
-
-     <Button
          android:id="@+id/btnDone"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_above="@+id/topic"
-         android:layout_marginRight="14dp"
-         android:layout_toLeftOf="@+id/btnEdit"
+         android:layout_alignParentTop="true"
+         android:layout_toLeftOf="@+id/btnDelete"
          android:text="@string/button_Done"
          android:textColor="#20B2AA"
          android:textSize="14sp"
