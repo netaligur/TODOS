@@ -61,13 +61,19 @@ private int month;
 private int day;
 private AlarmManager aManager;
 private boolean flagAlarm=false;
+private boolean fromEdit=false;
+
 
 	 public final static String EXTRA_MESSAGE = "com.example.todos2.TaskNOID";
+	 public final static String EXTRA_MESSAGE2 = "com.example.todos2.CreateTaskActivity";
     @Override
    public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        
         setContentView(R.layout.activity_create_task);
+        
+       
         timeLabel=(TextView)findViewById(R.id.show_date1);
         timeLabel.setText("no date entered");
         timeLabel.setTextColor(Color.RED);
@@ -90,21 +96,24 @@ private boolean flagAlarm=false;
         create.setTypeface(font);
         random.setTypeface(font);*/
     	 Intent intent = getIntent();
-    	  ArrayList<String>message = intent.getStringArrayListExtra(CreateTaskActivity.EXTRA_MESSAGE);
+    	  ArrayList<String>message = intent.getStringArrayListExtra(CreateTaskActivity.EXTRA_MESSAGE2);
     	   if (message!=null)
            {
-        	   ItemDetails temp= new ItemDetails();
-        	   temp.setName(message.get(0));
-        	   temp.setTopic(message.get(1));
-        	   //temp.setDone(0);        	   
-        	/*   temp.setYear(Integer.valueOf(message.get(2)));
-        	   temp.setMonth(Integer.valueOf(message.get(3)));
-        	   temp.setDay(Integer.valueOf(message.get(4)));
-        	   temp.setHour(Integer.valueOf(message.get(5)));
-        	   temp.setMinute(Integer.valueOf(message.get(6)));*/
-        	   System.out.println(temp.toString());       	   
-        	   editText.setText(temp.getName());
-        	   topicText.setText(temp.getTopic());   
+        	   
+    		   editText.setText(message.get(0));
+    		   topicText.setText(message.get(1));      	   
+    		   year=(Integer.valueOf(message.get(2)));
+        	   month=(Integer.valueOf(message.get(3)));
+        	   day=(Integer.valueOf(message.get(4)));
+        	   hour=(Integer.valueOf(message.get(5)));
+        	   minute=(Integer.valueOf(message.get(6)));
+        	   if (day!=0 && month!=0 && year!=0)
+        	   { 
+        		   		fromEdit=true; pickTime.setChecked(true);
+        		   		timeLabel.setText( + day + "/" + month + "/"+ year + ",At  " + hour + ":" + minute);
+    			        timeLabel.setTextColor(Color.BLUE);
+        		}
+        	     
            } 
     	  
     	
@@ -225,13 +234,19 @@ private boolean flagAlarm=false;
 				datePicker.setVisibility(View.INVISIBLE);
 				
 			}*/
+			
 			if((arg1)&&(arg0==pickTime))// (pickTime.isChecked())&&checkBox.isChecked()==false)
 			{
+				if (fromEdit==false)
+				{
 				DatePickerFragment dPick= new DatePickerFragment();
 				dPick.show(getFragmentManager(), "Select the Date");
 				TimePickerFragment tPick =new TimePickerFragment();
 				tPick.show(getFragmentManager(), "Select the Time");
-				flagAlarm=true;									
+				flagAlarm=true;	
+				}
+				fromEdit=false;
+				flagAlarm=true;
 			}
 			else if(arg0==pickTime)
 			{   

@@ -31,6 +31,7 @@ public class ItemListBaseAdapter extends BaseAdapter
 	private LayoutInflater l_Inflater;
 	private  ListController list_details;
 	private Activity context;
+	public final static String EXTRA_MESSAGE = "com.example.todos2.CreateTaskActivity";
 	static class ViewHolder
 	{
 		TextView txt_itemDescription;
@@ -43,6 +44,7 @@ public class ItemListBaseAdapter extends BaseAdapter
 		list_details = results;
 		l_Inflater = LayoutInflater.from(context);
 		this.context=context;
+		
 	
 		
 	}
@@ -78,9 +80,21 @@ public class ItemListBaseAdapter extends BaseAdapter
 				                			AlertDialog.Builder builder = new AlertDialog.Builder(context).setTitle(R.string.task_menu);
 				                			builder.setView(v1)				                			
 				                			.setPositiveButton(R.string.button_Edit, new DialogInterface.OnClickListener() {
-				                	               public void onClick(DialogInterface dialog, int id) {
+				                	               public void onClick(DialogInterface dialog, int id)
+				                	               {
+				                	            	   Intent intent = new Intent(context, CreateTaskActivity.class);
 				                	            	   
-				                	            	   //ArrayList<String>message = intent.getStringArrayListExtra(CreateTaskActivity.EXTRA_MESSAGE);
+				                	            	   ArrayList <String>  temp= new ArrayList<String>();
+				                	            		temp.add(0, list_details.get(position).getName());
+				                	            		temp.add(1, list_details.get(position).getTopic());
+				                	            		temp.add(2,String.valueOf(list_details.get(position).getYear()));
+				                	            		temp.add(3,String.valueOf(list_details.get(position).getMonth()));
+				                	            		temp.add(4,String.valueOf(list_details.get(position).getDay()));
+				                	            		temp.add(5,String.valueOf(list_details.get(position).getHour()));
+				                	            		temp.add(6,String.valueOf(list_details.get(position).getMinute()));
+				                	            		intent.putStringArrayListExtra(EXTRA_MESSAGE,temp);	
+				                	            		context.startActivity(intent);
+				                	            	   
 				                	               }
 				                	           })
 				                	           .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
