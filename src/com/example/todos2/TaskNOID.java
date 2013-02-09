@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -31,6 +32,7 @@ public class TaskNOID extends Activity implements View.OnClickListener
 	public final static String EXTRA_MESSAGE = "com.example.todos2.CreateTaskActivity";
 	public void onCreate(Bundle savedInstanceState)
     {
+	
 		list_details=ListController.getInstance(this);
 		list_details.boot();
 		//list_details.createTable();										// building the data base table
@@ -124,6 +126,11 @@ public class TaskNOID extends Activity implements View.OnClickListener
         
         Toast.makeText(getBaseContext(), "good", Toast.LENGTH_LONG).show();
 	}
+	public void onConfigurationChanged(Configuration newConfig) 
+    {
+        super.onConfigurationChanged(newConfig);
+
+    }
 
 }
 	

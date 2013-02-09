@@ -71,7 +71,7 @@ private boolean flagAlarm=false;
         timeLabel=(TextView)findViewById(R.id.show_date1);
         timeLabel.setText("no date entered");
         timeLabel.setTextColor(Color.RED);
-        pickTime= (CheckBox)findViewById(R.id.box_pick_time);
+        pickTime= (CheckBox)findViewById(R.id.box_pick_time1);
         pickTime.setOnCheckedChangeListener(this);
         create= (Button)findViewById(R.id.button_create);
     	create.setOnClickListener(this);

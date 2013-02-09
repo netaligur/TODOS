@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".OpeningActivity"
+             
           android:label="@string/title_activity_opening" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,12 +25,13 @@
         </activity>
         <activity
             android:name=".CreateTaskActivity"
+           
             android:label="@string/title_activity_create_task" >
-            <intent-filter>
+         <!-- -    <intent-filter> 
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>    -->
         </activity>
 
         <service android:name=".MyService" />
@@ -41,15 +43,16 @@
             </intent-filter>
         </receiver>
 
-        <activity
+      	  <activity
             android:name=".TaskNOID"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_task_noid" >
             
-            <intent-filter>
+          <!--   <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>  -->
         </activity>
     </application>
 

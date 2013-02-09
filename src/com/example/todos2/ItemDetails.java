@@ -1,6 +1,6 @@
 package com.example.todos2;
 
-public class ItemDetails 
+public  class ItemDetails 
 {
 	
 	private String description;
@@ -110,6 +110,12 @@ public class ItemDetails
 	@Override
 	public String toString() {
 		return "\nAlarmed to: " + day + "/" + month + "/"+ year + ",At  " + hour + ":" + minute ;
+	}
+	public String toStringDialogAlarm() 
+	{
+		if (day==0 && month==0 && year==0)
+			return "No Alarm Was Set";
+		return day + "/" + month + "/"+ year + ", At  " + hour + ":" + minute ;
 	}
 	public String getName()
 	{

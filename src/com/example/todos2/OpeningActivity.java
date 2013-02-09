@@ -23,11 +23,7 @@ public class OpeningActivity extends Activity {
        
         Intent intent = new Intent(this, TaskNOID.class);
       
-        try
-        {
-            Thread.sleep(3000);
-        }
-        catch (Exception e){}
+       
         startActivity(intent);
     }
 

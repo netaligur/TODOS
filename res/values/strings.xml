@@ -5,17 +5,22 @@
     <string name="title_activity_task_noid">TaskNOID</string>
     <string name="button_Add">Add</string>
     <string name="button_Delete">Delete</string>
-    <string name="Description">Description</string>
-    <string name="button_create">create</string>
+    <string name="Description">Enter a Description</string>
+    <string name="button_create">Save</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_create_task">CreateTaskActivity</string>
     <string name="pick_time">Select Time</string>
-    <string name="Topic">Topic</string>
+    <string name="Topic">Enter a Topic</string>
     <string name="button_Edit">Edit</string>
     <string name="button_random">Random Task From The Web</string>
     <string name="button_Done">Done</string>
     <string name="title_activity_opening">OpeningActivity</string>
-    <string name="task_menu">Task Menu</string>
+    <string name="task_menu">Task Details</string>
+    <string name="show_topic">Topic:</string>
+    <string name="show_description">Description:</string>
+    <string name="show_alarm">Alarmed to:</string>
+    <string name="show_location">location:</string>
+    <string name="cancel">Cancel</string>
 	
 
 

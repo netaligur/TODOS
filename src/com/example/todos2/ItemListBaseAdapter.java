@@ -1,6 +1,10 @@
 package com.example.todos2;
 
+import java.util.ArrayList;
+
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -20,9 +24,13 @@ import android.content.DialogInterface;
 
 public class ItemListBaseAdapter extends BaseAdapter 
 {
+	private View v1;
+	private TextView showTopic;
+	private TextView showDescription;
+	private TextView showAlarm;
 	private LayoutInflater l_Inflater;
 	private  ListController list_details;
-	private Context context;
+	private Activity context;
 	static class ViewHolder
 	{
 		TextView txt_itemDescription;
@@ -31,11 +39,10 @@ public class ItemListBaseAdapter extends BaseAdapter
 		//Button btdEdit;
 		Button btdDone;
 	}
-	public ItemListBaseAdapter(Context context, ListController results) {
+	public ItemListBaseAdapter(Activity context, ListController results) {
 		list_details = results;
 		l_Inflater = LayoutInflater.from(context);
 		this.context=context;
-		
 	
 		
 	}
@@ -51,49 +58,39 @@ public class ItemListBaseAdapter extends BaseAdapter
 				    convertView.setOnClickListener(new OnClickListener() {//open dialog when clicking a list item
 				                    public void onClick(View paramView)
 				                    {
-				                    	
-				                    	
-				                    					
+				                    
 				                			AlertDialog dialogBox = OptionsDialogBox(list_details.get(position),paramView);
-				                			//System.out.println("good");
 				                			dialogBox.show();
+				                			showTopic=(TextView)v1.findViewById(R.id.ShowTopicsItem);
+				                			showTopic.setText(list_details.get(position).getTopic());
+				                			showDescription=(TextView)v1.findViewById(R.id.ShowDescriptionItem);
+				                			showDescription.setText(list_details.get(position).getName());
+				                			showAlarm=(TextView)v1.findViewById(R.id.ShowAlarmItem);
+				                			showAlarm.setText(list_details.get(position).toStringDialogAlarm() );
 				                		
 				                	}
 				                		
 				                		public AlertDialog OptionsDialogBox(final ItemDetails it, final View v)
 				                		{
-				                			final CharSequence[] options = {"Edit Task","Show Task Details","Mark Me As Important"};
-				                			
-				                			AlertDialog IntervalAlarmChoice = new AlertDialog.Builder(context).setTitle(R.string.task_menu).setItems(options, new DialogInterface.OnClickListener()
-				                			    {
-				                			        public void onClick(DialogInterface dialog, int which) 
-				                			        {
-				                			        	if(options[which]=="Edit Task")
-				                			        	{
-				                			        		/*db.open();
-				                			        		db.deleteTask(it);
-				                			        		db.close();
-				                			        		databasesingleton.getArrayList().remove(it);
-				                			        		adapter .notifyDataSetChanged();
-				                			        		Intent intent = new Intent(getApplicationContext(), TimeNotification.class);
-				                			        		PendingIntent.getBroadcast(getApplicationContext(), it.getId(), intent,PendingIntent.FLAG_UPDATE_CURRENT).cancel();*/
-				                			        	}
-				                			        	
-				                			        	
-				                			        	if(options[which]=="Mark Me As Important"){
-				                			        		
-				                			        		//showDialog(it.getId());
-				                			        		}
-				                			        	if(options[which]=="Show Task Details"){
-				                			        		
-				                			        		//TextView info = (TextView)v.findViewById(R.id.info);
-				                			        		//info.setVisibility(0);
-				                			        	}
-				                			        }
-				                			    })
-				                			    .create();   
-				                		        return IntervalAlarmChoice;
-				                		}
+				                			//final CharSequence[] options = {"Edit Task","Show Task Details","Mark Me As Important"};
+				                			LayoutInflater inflater = LayoutInflater.from(context);
+				                			 v1=inflater.inflate(R.layout.task_details_edit, null);
+				                			AlertDialog.Builder builder = new AlertDialog.Builder(context).setTitle(R.string.task_menu);
+				                			builder.setView(v1)				                			
+				                			.setPositiveButton(R.string.button_Edit, new DialogInterface.OnClickListener() {
+				                	               public void onClick(DialogInterface dialog, int id) {
+				                	            	   
+				                	            	   //ArrayList<String>message = intent.getStringArrayListExtra(CreateTaskActivity.EXTRA_MESSAGE);
+				                	               }
+				                	           })
+				                	           .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+				                	               public void onClick(DialogInterface dialog, int id) {
+				                	                   
+				                	               }
+				                	           });      
+				                		
+				                	    return builder.create();
+				                	}
 				                		
 				    
 				                	    protected Dialog onCreateDialog(final int id)
