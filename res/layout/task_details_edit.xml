@@ -101,16 +101,14 @@
 
     <TextView
         android:id="@+id/ShowLocationItem"
-        android:layout_width="128dp"
-        android:layout_height="wrap_content"
+        android:layout_width="196dp"
+        android:layout_height="31dp"
         android:layout_marginTop="0dp"
-        android:layout_x="136dp"
-        android:layout_y="159dp"
+        android:layout_x="96dp"
+        android:layout_y="146dp"
         android:textSize="14dp"
         android:textStyle="bold"
         android:typeface="serif" />
-
- 
 
 </AbsoluteLayout>
 </ScrollView>

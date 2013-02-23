@@ -28,6 +28,7 @@ public class ItemListBaseAdapter extends BaseAdapter
 	private TextView showTopic;
 	private TextView showDescription;
 	private TextView showAlarm;
+	private TextView showLocation;
 	private LayoutInflater l_Inflater;
 	private  ListController list_details;
 	private Activity context;
@@ -69,6 +70,8 @@ public class ItemListBaseAdapter extends BaseAdapter
 				                			showDescription.setText(list_details.get(position).getName());
 				                			showAlarm=(TextView)v1.findViewById(R.id.ShowAlarmItem);
 				                			showAlarm.setText(list_details.get(position).toStringDialogAlarm() );
+				                			showLocation=(TextView)v1.findViewById(R.id.ShowLocationItem);
+				                			showLocation.setText(list_details.get(position).getAddress() );
 				                		
 				                	}
 				                		
@@ -93,6 +96,7 @@ public class ItemListBaseAdapter extends BaseAdapter
 				                	            		temp.add(5,String.valueOf(list_details.get(position).getHour()));
 				                	            		temp.add(6,String.valueOf(list_details.get(position).getMinute()));
 				                	            		intent.putStringArrayListExtra(EXTRA_MESSAGE,temp);	
+				                	            		list_details.deleteOrgan(position);
 				                	            		context.startActivity(intent);
 				                	            	   
 				                	               }

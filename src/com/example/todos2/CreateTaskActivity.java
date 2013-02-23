@@ -10,6 +10,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,16 +25,25 @@ import android.app.DialogFragment;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -45,15 +56,18 @@ import android.widget.Toast;
 
 public class CreateTaskActivity extends Activity  implements OnClickListener, OnCheckedChangeListener 
 {
+private Button	editLocation;
 private TextView timeLabel;
+private TextView choosenLocation;
 private CheckBox pickTime;
 private Button create;
 private Button random;
+private Button okLocation;
 private EditText editText;
 private EditText topicText;
-//private TimePicker timePicker;
-//private DatePicker datePicker;
+private EditText locationLabel;
 private CheckBox checkBox;
+private CheckBox locationBox;
 private int hour;
 private int minute;
 private int year;
@@ -62,6 +76,13 @@ private int day;
 private AlarmManager aManager;
 private boolean flagAlarm=false;
 private boolean fromEdit=false;
+private boolean locationFlag=false;
+private String address;
+private Address addresschoosen;
+private List<Address> listAddress;
+private Geocoder geo;
+private LocationManager locationManager;
+
 
 
 	 public final static String EXTRA_MESSAGE = "com.example.todos2.TaskNOID";
@@ -72,21 +93,35 @@ private boolean fromEdit=false;
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_create_task);
+       locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         
-       
+        geo=new Geocoder(this,Locale.getDefault());
         timeLabel=(TextView)findViewById(R.id.show_date1);
-        timeLabel.setText("no date entered");
+        timeLabel.setText("No Date Was Entered");
         timeLabel.setTextColor(Color.RED);
+        locationLabel=(EditText)findViewById(R.id.edit_location);
+        locationLabel.setText("Enter Location");
+        locationLabel.setTextColor(Color.RED);
+        choosenLocation=(TextView)findViewById(R.id.show_choosen_location);
+        choosenLocation.setText("No Location Was Entered");
+        choosenLocation.setTextColor(Color.RED);
+        //locationLabel.setAdapter(adapter);
         pickTime= (CheckBox)findViewById(R.id.box_pick_time1);
         pickTime.setOnCheckedChangeListener(this);
         create= (Button)findViewById(R.id.button_create);
     	create.setOnClickListener(this);
     	random= (Button)findViewById(R.id.button_random);
     	random.setOnClickListener(this);
+    	okLocation= (Button)findViewById(R.id.okLocation);
+    	okLocation.setOnClickListener(this);
+    	editLocation= (Button)findViewById(R.id.editLocation);
+    	editLocation.setOnClickListener(this);
     	//timePicker=(TimePicker)findViewById (R.id.timePicker);
     	//datePicker = (DatePicker)findViewById(R.id.datePicker);
     	checkBox = (CheckBox)findViewById(R.id.checkBox);
     	checkBox.setOnCheckedChangeListener(this);
+    	locationBox = (CheckBox)findViewById(R.id.checkBoxLocation);
+    	locationBox.setOnCheckedChangeListener(this);
     	//timePicker.setIs24HourView(true);
     	aManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
     	editText=(EditText)findViewById(R.id.edit_message);
@@ -128,7 +163,7 @@ private boolean fromEdit=false;
         return super.onOptionsItemSelected(item);
     }
 
-
+/*button chlicks*/
 	public void onClick(View v) 
 	{
 		
@@ -148,16 +183,32 @@ private boolean fromEdit=false;
 					e.printStackTrace();
 				}
 			}
-	/*	if (v.getId()==R.id.button_pick_time)
+		if (v.getId()==R.id.okLocation)
 		{
-			DatePickerFragment dPick= new DatePickerFragment();
-			dPick.show(getFragmentManager(), "Select the Date");
-			TimePickerFragment tPick =new TimePickerFragment();
-			tPick.show(getFragmentManager(), "Select the Time");
-			flagAlarm=true;
+			address=locationLabel.getText().toString();
+			try {
+				listAddress=geo.getFromLocationName(address,5);
+				chooseAddress(listAddress);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("cautch on bad laction");
+				
+				e.printStackTrace();
+			}
+		
 			
-		}*/
+		}
+		if (v.getId()==R.id.editLocation)
+		{
+			locationLabel.setVisibility(0);
+			okLocation.setVisibility(0);  /* 0=visable and 4 not */
+			choosenLocation.setVisibility(4);
+			editLocation.setVisibility(4);
+			//address=(String) locationLabel.getText();
+			locationFlag=false;
 			
+		}
 		if (v.getId()==R.id.button_create)
 		{
 		
@@ -181,12 +232,7 @@ private boolean fromEdit=false;
 		
 		
 		
-		if (flagAlarm==true)
-		{
-			setTimeAlarm();	
-			flagAlarm=false;
-			
-		}
+		
 		temp.add(0, result_text);
 		temp.add(1, topic_text);
 		temp.add(2,String.valueOf(year));
@@ -196,45 +242,76 @@ private boolean fromEdit=false;
 		temp.add(6,String.valueOf(minute));
 		
 		
-		
+		ItemDetails item= new ItemDetails();
+   	   item.setName(result_text);
+   	   item.setTopic(topic_text);
+   	   //temp.setDone(0);
+   	   
+   	   item.setYear(year);
+   	  item.setMonth(month);
+   	   item.setDay(day);
+   	   item.setHour(hour);
+   	   item.setMinute(minute);
+   	   item.setAddress(address);
+		ListController list_details=ListController.getInstance(this);
+		list_details.addOrgan(item);
 		intent.putStringArrayListExtra(EXTRA_MESSAGE,temp);	
+		if (flagAlarm==true)
+		{
+			setTimeAlarm(item.getId());	
+			flagAlarm=false;
+			
+		}
+		if (locationFlag==true)
+		{
+			setLocationAlarm(item.getId());
+			locationFlag=false;
+		}
 		startActivity(intent);
 		}
 	}
-		private void setTimeAlarm() 
+		private void setTimeAlarm(int id) 
 		{
 			  Intent intent = new Intent(this, ReminderBroadCastReceiver.class);
 			  String result_text=editText.getText().toString();
 			  
 			  intent.putExtra(EXTRA_MESSAGE, result_text);
 			  
-			  PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-			  
+			  PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, intent, PendingIntent.FLAG_ONE_SHOT);
+			  if(checkBox.isChecked())
+			  {
+				
+			        Calendar cal = Calendar.getInstance();
+			        cal.set(Calendar.HOUR_OF_DAY,hour);
+			        cal.set(Calendar.MINUTE,minute);
+			        cal.set(Calendar.SECOND, 0);
+			       
+			       aManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);  
+			        
+			  }
+			  else{
 			  Calendar cal = Calendar.getInstance();
 			  
 			  cal.set(year, month-1, day, hour, minute);
 			  
-			  aManager.set(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(), pendingIntent);
+			  aManager.set(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(), pendingIntent);}
 			  
 			  Toast toast = Toast.makeText(this, "will be remember", Toast.LENGTH_SHORT);
 			  toast.show();
 			
 		}
+		void setLocationAlarm(int id)
+		{
+			  Intent intent = new Intent(this, ReminderBroadCastReceiver.class);
+			  String result_text=editText.getText().toString();
+			  intent.putExtra(EXTRA_MESSAGE, result_text);
+			
+			 PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, intent, PendingIntent.FLAG_ONE_SHOT);
+			 addresschoosen.getLatitude();
+			locationManager.addProximityAlert(addresschoosen.getLatitude(), addresschoosen.getLongitude(),50,-1,pendingIntent );
+		}
 		/* *****************check box in the future (repeated tasks!!!!)*******************************/	
 		public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-			 
-			/*if(arg1)
-			{
-				timePicker.setVisibility(View.VISIBLE);
-				datePicker.setVisibility(View.VISIBLE);
-			}
-			else
-			{
-				timePicker.setVisibility(View.INVISIBLE);
-				datePicker.setVisibility(View.INVISIBLE);
-				
-			}*/
-			
 			if((arg1)&&(arg0==pickTime))// (pickTime.isChecked())&&checkBox.isChecked()==false)
 			{
 				if (fromEdit==false)
@@ -259,6 +336,28 @@ private boolean fromEdit=false;
 		        hour=0;
 		        minute=0;
 		     }
+			if (arg0==locationBox && arg1==true)
+			{
+				locationLabel.setVisibility(0);
+				okLocation.setVisibility(0);  /* 0=visable and 4 not */
+				choosenLocation.setVisibility(4);
+				//address=(String) locationLabel.getText();
+				
+			}
+			if (arg0==locationBox && arg1==false)
+			{
+				locationLabel.setVisibility(4);
+				okLocation.setVisibility(4);
+				
+				choosenLocation.setVisibility(0);
+				choosenLocation.setText("No Location Was Entered");
+				address="No Location Was Entered";
+			    choosenLocation.setTextColor(Color.RED);
+				//address=(String) locationLabel.getText();
+			    locationFlag=false;
+			   
+				
+			}
 		}
 	
 		private class GetFromWebTask extends AsyncTask<URL, Integer , String>
@@ -359,7 +458,54 @@ private boolean fromEdit=false;
 				}
 		}
 	
-		
+		public void chooseAddress( final List<Address> listAddress){
+			
+			 
+			final List<String> listItems = new ArrayList<String>();
+			 
+			
+			 for (int i=0; i<listAddress.size(); i++)
+			 {
+				    Address address = listAddress.get(i);
+				    StringBuilder stringBuilder = new StringBuilder();
+				    
+				    	stringBuilder.append(address.getAddressLine(1)).append(", ").append(address.getAddressLine(0)); 
+				    	listItems.add(stringBuilder.toString());
+				   
+				 /*   else
+				    {
+				    	stringBuilder.append("").append(", ").append(address.getAddressLine(0));
+					    listItems.add(stringBuilder.toString());
+				    }*/
+			 }
+		 
+			CharSequence[] Items = listItems.toArray(new CharSequence[listItems.size()]);
+			AlertDialog IntervalAlarmChoice=new AlertDialog.Builder(this).setItems(Items, new DialogInterface.OnClickListener()
+			{
+			  public void onClick(DialogInterface dialog, int position) {
+				
+				  int place = position--;
+			 
+				 // setAlaramLocation(listAddress.get(c));
+				  choosenLocation.setText(listItems.get(place));
+				  choosenLocation.setTextColor(Color.BLUE);
+				  choosenLocation.setVisibility(0);
+				  locationLabel.setVisibility(4);
+				  locationLabel.setText(listItems.get(place));
+				  address=listItems.get(place);
+				  okLocation.setVisibility(4);
+				  editLocation.setVisibility(0);
+				  locationFlag=true;				  
+				  addresschoosen= listAddress.get(place);
+				  dialog.dismiss();
+			  }
+			  })
+			   .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+				                	               public void onClick(DialogInterface dialog, int id) { }}
+			  )
+		      .create();
+			  IntervalAlarmChoice.show();   
+			 }
 	}
 
 	

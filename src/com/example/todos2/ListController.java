@@ -3,8 +3,11 @@ package com.example.todos2;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import android.app.AlarmManager;
 import android.app.ListActivity;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 
 import android.database.sqlite.SQLiteDatabase;
 
@@ -20,13 +23,18 @@ private static DatabaseHandler db =null;
   private int index;
 //private	Context context;	
 private static  LinkedList <ItemDetails>list_details;
+private AlarmManager aManager;
 private	ListController(Context context)
 {	 
 	 this.context = context;
 	 db = new DatabaseHandler(context);
 	 list_details = new  LinkedList<ItemDetails>();
 }	
-
+public void setAlarmManager (AlarmManager aManagers)
+{
+	aManager=aManagers;
+	
+}
 public static	ListController getInstance(Context context)
 {	
 	
@@ -85,9 +93,15 @@ public void deleteOrgan (int index)
 {
 	
 ItemDetails item=list_details.get(index);
+Intent myIntent = new Intent(context, ReminderBroadCastReceiver.class);
+if (myIntent!=null)
+{
+ PendingIntent pendingIntent= PendingIntent.getBroadcast(context,item.getId(), myIntent,PendingIntent.FLAG_ONE_SHOT);
+ aManager.cancel(pendingIntent);
+ }
 list_details.remove(index);
-
 db.deleteTask(item);
+
 }
 /*****/
 public void editOrgan (int index)

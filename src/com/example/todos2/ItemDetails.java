@@ -12,9 +12,16 @@ public  class ItemDetails
 	private int day;
 	private int hour;
 	private int minute;
+	private String address;
 
 	
 	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public int getYear() {
 		return year;
 	}
@@ -74,6 +81,7 @@ public  class ItemDetails
 		this.minute=item.minute;
 		this.month=item.month;
 		this.year=item.year;
+		this.address=item.address;
 	}
 	public ItemDetails() {
 		this.description="no description";
@@ -84,6 +92,7 @@ public  class ItemDetails
 		this.minute=0;
 		this.month=0;
 		this.year=0;
+		this.address="no address";
 	}
 	public ItemDetails(String description) {
 		super();
@@ -95,6 +104,7 @@ public  class ItemDetails
 		this.minute=0;
 		this.month=0;
 		this.year=0;
+		this.address="no address";
 	}
 	public ItemDetails(String description,String topic) {
 		super();
@@ -106,6 +116,7 @@ public  class ItemDetails
 		this.minute=0;
 		this.month=0;
 		this.year=0;
+		this.address="no address";
 	}
 	@Override
 	public String toString() {
@@ -116,6 +127,9 @@ public  class ItemDetails
 		if (day==0 && month==0 && year==0)
 			return "No Alarm Was Set";
 		return day + "/" + month + "/"+ year + ", At  " + hour + ":" + minute ;
+	}
+	public String toStringAddress() {
+		return "Location: " + address ;
 	}
 	public String getName()
 	{
