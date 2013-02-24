@@ -32,6 +32,7 @@ public class ItemListBaseAdapter extends BaseAdapter
 	private LayoutInflater l_Inflater;
 	private  ListController list_details;
 	private Activity context;
+	private String topic;
 	public final static String EXTRA_MESSAGE = "com.example.todos2.CreateTaskActivity";
 	static class ViewHolder
 	{
@@ -215,10 +216,18 @@ public class ItemListBaseAdapter extends BaseAdapter
 	 
 	 	holder.btdDone.setOnClickListener(new OnClickListener()
 	 	{	
-	        public void onClick(View v) {
+	        public void onClick(View v) 
+	        {
 	        	
 	        	list_details.updateDone(position);
 	        	notifyDataSetChanged();
+	        	Intent sendIntent = new Intent();
+	        	sendIntent.setAction(Intent.ACTION_SEND);
+	        	topic=list_details.get(position).getTopic();
+	        	sendIntent.putExtra(Intent.EXTRA_TEXT, "I Just Completed "+topic+" via TaskNOID");
+	        	sendIntent.setType("text/plain");
+	        	context.startActivity(Intent.createChooser(sendIntent, "Share with"));
+	        	
 	        }
 	    });
 		return convertView;
