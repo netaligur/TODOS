@@ -10,11 +10,12 @@
     <Button
         android:layout_width="117dp"
         android:layout_height="50dp"
-        android:background="@drawable/add_b"
+        android:background="@drawable/button_add"
         android:onClick="addTask"
         android:textColor="#20B2AA"
+        android:textStyle="bold"
         android:textSize="14sp"
-        android:textStyle="bold" />
+         />
 
  <ListView 
     android:id="@+id/list"

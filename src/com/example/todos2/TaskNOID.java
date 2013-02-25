@@ -37,6 +37,7 @@ public class TaskNOID extends Activity implements View.OnClickListener
 	private Intent alarm;
 	private ListController list_details;
 	public final static String EXTRA_MESSAGE = "com.example.todos2.CreateTaskActivity";
+	@Override
 	 public void onStart() 
 	  {
 		super.onStart();
@@ -183,7 +184,7 @@ public class TaskNOID extends Activity implements View.OnClickListener
         super.onConfigurationChanged(newConfig);
 
     }
-	
+	@Override
 	 public void onStop()
 	 {
 		    super.onStop();

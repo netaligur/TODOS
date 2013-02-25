@@ -15,7 +15,7 @@
     android:layout_width="match_parent"
     android:layout_height="58dp"
     android:background="@drawable/rat_widget"
-    android:typeface="serif" />
+     />
 
       <Button
           android:id="@+id/play_button"
@@ -38,7 +38,7 @@
  	        android:textColor="#20B2AA"
  	        android:textSize="18dp"
  	        android:textStyle="bold"
- 	        android:typeface="serif" />
+ 	         />
 
  	    <Button
  	        android:id="@+id/nextTask"

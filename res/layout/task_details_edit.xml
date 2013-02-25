@@ -23,7 +23,7 @@
         android:textColor="#20B2AA"
         android:textSize="14dp"
         android:textStyle="bold"
-        android:typeface="serif" />
+         />
     
       <TextView
         android:id="@+id/ShowTopicsItem"
@@ -34,7 +34,7 @@
         android:layout_y="4dp"
         android:textSize="14dp"
         android:textStyle="bold"
-        android:typeface="serif" />
+         />
     
 	  <TextView
         android:id="@+id/ShowDescription"
@@ -47,7 +47,7 @@
         android:textColor="#20B2AA"
         android:textSize="14dp"
         android:textStyle="bold"
-        android:typeface="serif" />
+       />
 	  
       <TextView
         android:id="@+id/ShowDescriptionItem"
@@ -58,7 +58,7 @@
         android:layout_y="38dp"
         android:textSize="14dp"
         android:textStyle="bold"
-        android:typeface="serif" />
+         />
       
         
      <TextView
@@ -72,7 +72,7 @@
         android:textColor="#20B2AA"
         android:textSize="14dp"
         android:textStyle="bold"
-        android:typeface="serif" />
+         />
 
   
 
@@ -85,7 +85,7 @@
         android:layout_y="125dp"
         android:textSize="14dp"
         android:textStyle="bold"
-        android:typeface="serif" />
+         />
     <TextView
         android:id="@+id/ShowLocation"
         android:layout_width="128dp"
@@ -97,7 +97,7 @@
         android:textColor="#20B2AA"
         android:textSize="14dp"
         android:textStyle="bold"
-        android:typeface="serif" />
+         />
 
     <TextView
         android:id="@+id/ShowLocationItem"
@@ -108,7 +108,7 @@
         android:layout_y="146dp"
         android:textSize="14dp"
         android:textStyle="bold"
-        android:typeface="serif" />
+         />
 
 </AbsoluteLayout>
 </ScrollView>

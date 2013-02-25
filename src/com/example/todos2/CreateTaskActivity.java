@@ -53,7 +53,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
+import com.google.analytics.tracking.android.EasyTracker;
 public class CreateTaskActivity extends Activity  implements OnClickListener, OnCheckedChangeListener 
 {
 private Button	editLocation;
@@ -87,6 +87,11 @@ private LocationManager locationManager;
 
 	 public final static String EXTRA_MESSAGE = "com.example.todos2.TaskNOID";
 	 public final static String EXTRA_MESSAGE2 = "com.example.todos2.CreateTaskActivity";
+	 public void onStart() 
+	  {
+		super.onStart();
+		EasyTracker.getInstance().activityStart(this);  
+	  }
     @Override
    public void onCreate(Bundle savedInstanceState)
     {
@@ -506,6 +511,11 @@ private LocationManager locationManager;
 		      .create();
 			  IntervalAlarmChoice.show();   
 			 }
+		 public void onStop()
+		 {
+			    super.onStop();
+			    EasyTracker.getInstance().activityStop(this);  
+		}
 	}
 
 	
