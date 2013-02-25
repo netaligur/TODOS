@@ -5,25 +5,50 @@
     android:padding="@dimen/widget_margin" >
 
   <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    >
-
-    <TextView
-      android:id="@+id/song_info"
-      android:layout_width="0dp"
+      android:background="#F0FFFF"
+      android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_weight="1" />
+      android:orientation="vertical" >
 
-    <Button
-      android:id="@+id/play_button"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent" />
+<TextView
+    android:id="@+id/TaskNOIDTitle"
+    android:layout_width="match_parent"
+    android:layout_height="58dp"
+    android:background="@drawable/rat_widget"
+    android:typeface="serif" />
 
-    <Button
-      android:id="@+id/skip_button"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent" />
+      <Button
+          android:id="@+id/play_button"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/add_from_widget"
+          android:textColor="#20B2AA" />
+
+ 	<LinearLayout
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="match_parent"
+ 	    android:background="#F0FFFF"
+ 	    android:orientation="horizontal" >
+
+ 	    <TextView
+ 	        android:id="@+id/widgetTask"
+ 	        android:layout_width="242dp"
+ 	        android:layout_height="47dp"
+ 	        android:text="@string/widget_t"
+ 	        android:textColor="#20B2AA"
+ 	        android:textSize="18dp"
+ 	        android:textStyle="bold"
+ 	        android:typeface="serif" />
+
+ 	    <Button
+ 	        android:id="@+id/nextTask"
+ 	        android:layout_width="32dp"
+ 	        android:layout_height="47dp"
+ 	        android:layout_weight="0.18"
+ 	        android:background="@drawable/arrow" />
+
+ 	</LinearLayout>
+
   </LinearLayout>
+
 </FrameLayout>

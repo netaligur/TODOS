@@ -50,7 +50,6 @@ public void boot()
 	int max=0;
 	
 	list_details=db.getAllTasks();
-	System.out.println("boot");
 	 for (ItemDetails temp:list_details)
 	 {
 		 if (max<temp.getId())

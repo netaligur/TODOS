@@ -1,10 +1,10 @@
 package com.example.todos2;
 
+import com.google.analytics.tracking.android.EasyTracker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import android.location.Address;
 import android.location.Location;
 import android.location.LocationListener;
@@ -28,6 +28,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
+
+
 public class TaskNOID extends Activity implements View.OnClickListener
 {   
 	private Context context;
@@ -35,6 +37,11 @@ public class TaskNOID extends Activity implements View.OnClickListener
 	private Intent alarm;
 	private ListController list_details;
 	public final static String EXTRA_MESSAGE = "com.example.todos2.CreateTaskActivity";
+	 public void onStart() 
+	  {
+		super.onStart();
+		EasyTracker.getInstance().activityStart(this);  
+	  }
 	public void onCreate(Bundle savedInstanceState)
     {
 	
@@ -177,7 +184,11 @@ public class TaskNOID extends Activity implements View.OnClickListener
 
     }
 	
-
+	 public void onStop()
+	 {
+		    super.onStop();
+		    EasyTracker.getInstance().activityStop(this);  
+	}
 }
 	
 
