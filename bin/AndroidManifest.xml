@@ -8,7 +8,7 @@
 	<uses-permission android:name="android.permission.WRITE_SETTINGS"/>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="4"
         android:targetSdkVersion="15" />
 
     <application
@@ -28,7 +28,7 @@
         </activity>
         <activity
             android:name=".CreateTaskActivity"
-           
+         	android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_create_task" >
          <!-- -    <intent-filter> 
                 <action android:name="android.intent.action.MAIN" />

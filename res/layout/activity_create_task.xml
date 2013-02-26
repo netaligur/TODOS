@@ -4,71 +4,57 @@
   android:layout_width="fill_parent"
   android:layout_height="fill_parent"
   android:visibility="visible">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"   
+	android:orientation="vertical" 
+	android:background="@drawable/paper7">
 
-    <AbsoluteLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/paper7"
-        android:orientation="vertical" >
-
-       
-
-        <Button
-            android:id="@+id/button_create"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_x="0dp"
-            android:layout_y="417dp"
-            android:onClick="create"
-            android:background="@drawable/button_save"
-            android:text="@string/button_create" />
    	    <TextView
              xmlns:android="http://schemas.android.com/apk/res/android"
-             android:id="@+id/topic_task"
+             android:id="@+id/topic_task2"
              android:text="Topic:"
              android:layout_width="189dp"
              android:layout_height="wrap_content"
-             android:layout_x="18dp"
-             android:layout_y="15dp"
+			 android:paddingTop="20dp"
+			 android:paddingLeft="10dp"
              android:textStyle="bold"
               />
         <EditText
             android:maxLength="25"
-            android:maxHeight="5px"
             android:id="@+id/edit_topic"
              android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_x="0dp"
-            android:layout_y="35dp"
             android:hint="@string/Topic" />
  		 <TextView
              xmlns:android="http://schemas.android.com/apk/res/android"
-             android:id="@+id/des_task"
+             android:id="@+id/des_task_2"
              android:text="Description:"
              android:layout_width="189dp"
              android:layout_height="wrap_content"
-             android:layout_x="18dp"
-             android:layout_y="75dp"
              android:textStyle="bold"
+             android:paddingLeft="10dp"
               />
         <EditText
-            android:maxHeight="20px"
             android:maxLength="110"
             android:id="@+id/edit_message"
              android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_x="0dp"
-            android:layout_y="90dp"
             android:hint="@string/Description" />
-
+ <AbsoluteLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        
         <CheckBox
             android:id="@+id/box_pick_time1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_x="16dp"
-            android:layout_y="212dp"
+            android:layout_y="92dp"
             android:text="@string/pick_time" />
 
         
@@ -79,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:layout_x="167dp"
-            android:layout_y="220dp"
+            android:layout_y="100dp"
             android:textColor="#20B2AA"
             android:textSize="14dp"
             android:textStyle="bold"  />
@@ -89,14 +75,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_x="16dp"
-            android:layout_y="260dp"
+            android:layout_y="140dp"
             android:text="Repeat Daily" />
         <CheckBox
             android:id="@+id/checkBoxLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_x="16dp"
-            android:layout_y="308dp"
+            android:layout_y="188dp"
             android:text="Add Location" />
         
          <EditText
@@ -105,7 +91,7 @@
              android:layout_width="218dp"
              android:layout_height="55dp"
              android:layout_x="18dp"
-             android:layout_y="340dp"
+             android:layout_y="220dp"
              android:visibility="invisible" />
           <TextView
              xmlns:android="http://schemas.android.com/apk/res/android"
@@ -113,7 +99,7 @@
              android:layout_width="189dp"
              android:layout_height="wrap_content"
              android:layout_x="18dp"
-             android:layout_y="340dp"
+             android:layout_y="220dp"
               />
 
          <Button
@@ -121,7 +107,7 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_x="238dp"
-             android:layout_y="340dp"
+             android:layout_y="220dp"
              android:text="OK"
              android:visibility="invisible" />
          <Button
@@ -129,10 +115,17 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_x="228dp"
-             android:layout_y="340dp"
+             android:layout_y="220dp"
              android:text="Change"
              android:visibility="invisible" />
       
     </AbsoluteLayout>
-
+    <Button
+            android:id="@+id/button_create"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="create"
+            android:background="@drawable/button_save"
+            android:text="@string/button_create" />
+</LinearLayout>
 </ScrollView>

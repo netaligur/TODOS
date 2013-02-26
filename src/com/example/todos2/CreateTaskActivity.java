@@ -15,13 +15,14 @@ import java.util.Locale;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import android.support.v4.app.FragmentActivity;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
+//import android.app.DialogFragment;
+import android.support.v4.app.DialogFragment;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -54,7 +55,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import com.google.analytics.tracking.android.EasyTracker;
-public class CreateTaskActivity extends Activity  implements OnClickListener, OnCheckedChangeListener 
+public class CreateTaskActivity extends FragmentActivity  implements OnClickListener, OnCheckedChangeListener 
 {
 private Button	editLocation;
 private TextView timeLabel;
@@ -322,9 +323,9 @@ private LocationManager locationManager;
 				if (fromEdit==false)
 				{
 				DatePickerFragment dPick= new DatePickerFragment();
-				dPick.show(getFragmentManager(), "Select the Date");
+				dPick.show(getSupportFragmentManager(), "Select the Date");
 				TimePickerFragment tPick =new TimePickerFragment();
-				tPick.show(getFragmentManager(), "Select the Time");
+				tPick.show(getSupportFragmentManager(), "Select the Time");
 				flagAlarm=true;	
 				}
 				fromEdit=false;
