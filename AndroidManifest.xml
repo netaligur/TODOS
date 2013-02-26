@@ -37,7 +37,7 @@
             </intent-filter>    -->
         </activity>
 
-        <service android:name=".MyService" />
+     <!--   <service android:name=".MyService" />-->
 
         <receiver android:name=".ServiceFromBroadcast" />
         <receiver android:name=".ReminderBroadCastReceiver" >

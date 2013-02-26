@@ -24,23 +24,43 @@
             android:onClick="create"
             android:background="@drawable/button_save"
             android:text="@string/button_create" />
-
+   	    <TextView
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/topic_task"
+             android:text="Topic:"
+             android:layout_width="189dp"
+             android:layout_height="wrap_content"
+             android:layout_x="18dp"
+             android:layout_y="15dp"
+             android:textStyle="bold"
+              />
         <EditText
+            android:maxLength="25"
+            android:maxHeight="5px"
             android:id="@+id/edit_topic"
-            android:layout_width="300dp"
-            android:layout_height="62dp"
-            android:layout_x="12dp"
-            android:layout_y="60dp"
-            android:ems="10"
+             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_x="0dp"
+            android:layout_y="35dp"
             android:hint="@string/Topic" />
-
+ 		 <TextView
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/des_task"
+             android:text="Description:"
+             android:layout_width="189dp"
+             android:layout_height="wrap_content"
+             android:layout_x="18dp"
+             android:layout_y="75dp"
+             android:textStyle="bold"
+              />
         <EditText
+            android:maxHeight="20px"
+            android:maxLength="110"
             android:id="@+id/edit_message"
-            android:layout_width="300dp"
-            android:layout_height="62dp"
-            android:layout_x="12dp"
-            android:layout_y="128dp"
-            android:ems="10"
+             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_x="0dp"
+            android:layout_y="90dp"
             android:hint="@string/Description" />
 
         <CheckBox
@@ -51,14 +71,7 @@
             android:layout_y="212dp"
             android:text="@string/pick_time" />
 
-        <Button
-            android:id="@+id/button_random"
-            android:layout_width="300dp"
-            android:layout_height="46dp"
-            android:layout_x="8dp"
-            android:layout_y="9dp"
-            android:onClick="random"
-            android:text="@string/button_random" />
+        
 
         <TextView
             android:id="@+id/show_date1"
@@ -69,8 +82,7 @@
             android:layout_y="220dp"
             android:textColor="#20B2AA"
             android:textSize="14dp"
-            android:textStyle="bold"
-            android:typeface="serif" />
+            android:textStyle="bold"  />
 
         <CheckBox
             android:id="@+id/checkBox"

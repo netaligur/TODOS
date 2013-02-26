@@ -115,12 +115,12 @@ public class TaskNOID extends Activity implements View.OnClickListener
         // Register the listener with the Location Manager to receive location updates
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         /*****/
-        boolean Servic_Up = settings.getBoolean("IsServiceRun", false);
+      /*  boolean Servic_Up = settings.getBoolean("IsServiceRun", false);
         if(Servic_Up==false)
         {
          SetAlarmService();
         }
-     
+     */
    /*    if (message!=null)
        {
     	   ItemDetails temp= new ItemDetails();
@@ -152,7 +152,7 @@ public class TaskNOID extends Activity implements View.OnClickListener
     	startActivity(intent);
     }
 
-  
+  /*
 	private void SetAlarmService()
 	{
         alarm = new Intent(this,ServiceFromBroadcast.class);
@@ -170,7 +170,7 @@ public class TaskNOID extends Activity implements View.OnClickListener
         Toast.makeText(this, "service is up ", Toast.LENGTH_SHORT).show();
 	}
 			
-	
+	*/
 
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub

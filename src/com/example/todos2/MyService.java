@@ -1,4 +1,4 @@
-package com.example.todos2;
+/*package com.example.todos2;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -64,3 +64,4 @@ public class MyService extends IntentService
 		}	 
 	}
 }
+*/

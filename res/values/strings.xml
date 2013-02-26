@@ -12,7 +12,6 @@
     <string name="pick_time">Select Time</string>
     <string name="Topic">Enter a Topic</string>
     <string name="button_Edit">Edit</string>
-    <string name="button_random">Random Task From The Web</string>
     <string name="button_Done">Done</string>
     <string name="title_activity_opening">TaskNOID</string>
     <string name="task_menu">Task Details</string>

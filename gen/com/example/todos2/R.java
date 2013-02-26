@@ -37,39 +37,40 @@ public final class R {
         public static final int rat_widget=0x7f02000c;
     }
     public static final class id {
-        public static final int ShowAlarm=0x7f0a0018;
-        public static final int ShowAlarmItem=0x7f0a0019;
-        public static final int ShowDescription=0x7f0a0016;
-        public static final int ShowDescriptionItem=0x7f0a0017;
-        public static final int ShowLocation=0x7f0a001a;
-        public static final int ShowLocationItem=0x7f0a001b;
-        public static final int ShowTopics=0x7f0a0014;
-        public static final int ShowTopicsItem=0x7f0a0015;
-        public static final int TaskNOIDTitle=0x7f0a001c;
-        public static final int box_pick_time1=0x7f0a0003;
-        public static final int btnDelete=0x7f0a0011;
-        public static final int btnDone=0x7f0a0013;
+        public static final int ShowAlarm=0x7f0a0019;
+        public static final int ShowAlarmItem=0x7f0a001a;
+        public static final int ShowDescription=0x7f0a0017;
+        public static final int ShowDescriptionItem=0x7f0a0018;
+        public static final int ShowLocation=0x7f0a001b;
+        public static final int ShowLocationItem=0x7f0a001c;
+        public static final int ShowTopics=0x7f0a0015;
+        public static final int ShowTopicsItem=0x7f0a0016;
+        public static final int TaskNOIDTitle=0x7f0a001d;
+        public static final int box_pick_time1=0x7f0a0005;
+        public static final int btnDelete=0x7f0a0012;
+        public static final int btnDone=0x7f0a0014;
         public static final int button_create=0x7f0a0000;
-        public static final int button_random=0x7f0a0004;
-        public static final int checkBox=0x7f0a0006;
-        public static final int checkBoxLocation=0x7f0a0007;
-        public static final int editLocation=0x7f0a000b;
-        public static final int edit_location=0x7f0a0008;
-        public static final int edit_message=0x7f0a0002;
-        public static final int edit_topic=0x7f0a0001;
-        public static final int list=0x7f0a000f;
-        public static final int menu_settings=0x7f0a0020;
-        public static final int nextTask=0x7f0a001f;
-        public static final int okLocation=0x7f0a000a;
-        public static final int play_button=0x7f0a001d;
-        public static final int progressBar1=0x7f0a000d;
-        public static final int ratingBar1=0x7f0a000e;
-        public static final int show_choosen_location=0x7f0a0009;
-        public static final int show_date1=0x7f0a0005;
-        public static final int text=0x7f0a0012;
-        public static final int textView1=0x7f0a000c;
-        public static final int topic=0x7f0a0010;
-        public static final int widgetTask=0x7f0a001e;
+        public static final int checkBox=0x7f0a0007;
+        public static final int checkBoxLocation=0x7f0a0008;
+        public static final int des_task=0x7f0a0003;
+        public static final int editLocation=0x7f0a000c;
+        public static final int edit_location=0x7f0a0009;
+        public static final int edit_message=0x7f0a0004;
+        public static final int edit_topic=0x7f0a0002;
+        public static final int list=0x7f0a0010;
+        public static final int menu_settings=0x7f0a0021;
+        public static final int nextTask=0x7f0a0020;
+        public static final int okLocation=0x7f0a000b;
+        public static final int play_button=0x7f0a001e;
+        public static final int progressBar1=0x7f0a000e;
+        public static final int ratingBar1=0x7f0a000f;
+        public static final int show_choosen_location=0x7f0a000a;
+        public static final int show_date1=0x7f0a0006;
+        public static final int text=0x7f0a0013;
+        public static final int textView1=0x7f0a000d;
+        public static final int topic=0x7f0a0011;
+        public static final int topic_task=0x7f0a0001;
+        public static final int widgetTask=0x7f0a001f;
     }
     public static final class layout {
         public static final int activity_create_task=0x7f030000;
@@ -87,31 +88,30 @@ public final class R {
     public static final class string {
         public static final int Description=0x7f050006;
         public static final int Topic=0x7f05000b;
-        public static final int add_from_widget=0x7f050017;
+        public static final int add_from_widget=0x7f050016;
         public static final int app_name=0x7f050001;
         public static final int button_Add=0x7f050004;
         public static final int button_Delete=0x7f050005;
-        public static final int button_Done=0x7f05000e;
+        public static final int button_Done=0x7f05000d;
         public static final int button_Edit=0x7f05000c;
         public static final int button_create=0x7f050007;
-        public static final int button_random=0x7f05000d;
-        public static final int cancel=0x7f050015;
-        public static final int edit_location=0x7f050016;
+        public static final int cancel=0x7f050014;
+        public static final int edit_location=0x7f050015;
         /** Replace placeholder ID with your tracking ID
          */
         public static final int ga_trackingId=0x7f050000;
         public static final int hello_world=0x7f050008;
         public static final int menu_settings=0x7f050002;
         public static final int pick_time=0x7f05000a;
-        public static final int show_alarm=0x7f050013;
-        public static final int show_description=0x7f050012;
-        public static final int show_location=0x7f050014;
-        public static final int show_topic=0x7f050011;
-        public static final int task_menu=0x7f050010;
+        public static final int show_alarm=0x7f050012;
+        public static final int show_description=0x7f050011;
+        public static final int show_location=0x7f050013;
+        public static final int show_topic=0x7f050010;
+        public static final int task_menu=0x7f05000f;
         public static final int title_activity_create_task=0x7f050009;
-        public static final int title_activity_opening=0x7f05000f;
+        public static final int title_activity_opening=0x7f05000e;
         public static final int title_activity_task_noid=0x7f050003;
-        public static final int widget_t=0x7f050018;
+        public static final int widget_t=0x7f050017;
     }
     public static final class style {
         public static final int AppTheme=0x7f080000;

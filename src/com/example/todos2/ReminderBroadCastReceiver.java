@@ -21,7 +21,7 @@ private NotificationManager notificationManager;
 		
 		 notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		 
-		 CharSequence from = " Thinking Of You!!";
+		 CharSequence from = "TaskNOID";
 				  
 		 Intent intent2 = new Intent(context, TaskNOID.class);
 		 
@@ -31,7 +31,11 @@ private NotificationManager notificationManager;
 		
 		 notif.setLatestEventInfo(context, from, message, contentIntent);
 		 
+		 notif.defaults |= Notification.DEFAULT_SOUND;
+		 
 		 notif.flags |= Notification.FLAG_AUTO_CANCEL;
+		 
+		 
 		
 		 notificationManager.notify(0, notif);
 		 

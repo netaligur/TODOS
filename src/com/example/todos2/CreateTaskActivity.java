@@ -61,7 +61,7 @@ private TextView timeLabel;
 private TextView choosenLocation;
 private CheckBox pickTime;
 private Button create;
-private Button random;
+
 private Button okLocation;
 private EditText editText;
 private EditText topicText;
@@ -115,8 +115,8 @@ private LocationManager locationManager;
         pickTime.setOnCheckedChangeListener(this);
         create= (Button)findViewById(R.id.button_create);
     	create.setOnClickListener(this);
-    	random= (Button)findViewById(R.id.button_random);
-    	random.setOnClickListener(this);
+    	
+    	
     	okLocation= (Button)findViewById(R.id.okLocation);
     	okLocation.setOnClickListener(this);
     	editLocation= (Button)findViewById(R.id.editLocation);
@@ -172,7 +172,7 @@ private LocationManager locationManager;
 	public void onClick(View v) 
 	{
 		
-		if (v.getId()==R.id.button_random)
+		/*if (v.getId()==R.id.button_random)
 		{
 		
 			URL url;
@@ -187,7 +187,7 @@ private LocationManager locationManager;
 				 {
 					e.printStackTrace();
 				}
-			}
+			}*/
 		if (v.getId()==R.id.okLocation)
 		{
 			address=locationLabel.getText().toString();
@@ -365,7 +365,7 @@ private LocationManager locationManager;
 			}
 		}
 	
-		private class GetFromWebTask extends AsyncTask<URL, Integer , String>
+		/*private class GetFromWebTask extends AsyncTask<URL, Integer , String>
 		{
 			@Override
 			protected String doInBackground(URL... urls) 
@@ -415,7 +415,7 @@ private LocationManager locationManager;
 				topicText.setText(result);		
 				
 			}
-		}
+		}*/
 		public  class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener
 		{
 

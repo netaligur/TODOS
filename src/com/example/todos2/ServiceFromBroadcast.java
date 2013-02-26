@@ -10,7 +10,7 @@ public class ServiceFromBroadcast extends BroadcastReceiver
 	@Override
 	public void onReceive(Context context, Intent intent) 
 	{
-		 context.startService(new Intent(context, MyService.class));
+		 context.startService(new Intent(context, ReminderBroadCastReceiver.class));
 	}
 
 }
