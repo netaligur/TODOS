@@ -72,7 +72,7 @@ public class ItemListBaseAdapter extends BaseAdapter
 				                			showAlarm=(TextView)v1.findViewById(R.id.ShowAlarmItem);
 				                			showAlarm.setText(list_details.get(position).toStringDialogAlarm() );
 				                			showLocation=(TextView)v1.findViewById(R.id.ShowLocationItem);
-				                			showLocation.setText(list_details.get(position).getAddress() );
+				                			showLocation.setText(list_details.get(position).toStringAddress() );
 				                		
 				                	}
 				                		
@@ -182,10 +182,10 @@ public class ItemListBaseAdapter extends BaseAdapter
 		{
 		System.out.print(date);
 			if (list_details.get(position).getYear()!=0 && list_details.get(position).getMonth()!=0 && list_details.get(position).getDay()!=0)
-				holder.txt_itemDescription.setText(list_details.get(position).getName()+date);
+				holder.txt_itemDescription.setText(date);
 			
 			else
-				holder.txt_itemDescription.setText(list_details.get(position).getName());
+				holder.txt_itemDescription.setText("");
 		holder.txt_itemDescription.setPaintFlags( holder.txt_itemDescription.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
 		holder.txt_itemTopic.setPaintFlags( holder.txt_itemTopic.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
 		holder.txt_itemTopic.setText(list_details.get(position).getTopic());
@@ -193,10 +193,10 @@ public class ItemListBaseAdapter extends BaseAdapter
 		if (list_details.get(position).getDone()==1)
 		{
 			if (list_details.get(position).getYear()!=0 && list_details.get(position).getMonth()!=0 && list_details.get(position).getDay()!=0)
-				holder.txt_itemDescription.setText(list_details.get(position).getName()+date);
+				holder.txt_itemDescription.setText(date);
 			
 			else
-				holder.txt_itemDescription.setText(list_details.get(position).getName());
+				holder.txt_itemDescription.setText("");
 			
 			holder.txt_itemDescription.setPaintFlags(holder.txt_itemDescription.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 			holder.txt_itemTopic.setText(list_details.get(position).getTopic());
@@ -224,9 +224,12 @@ public class ItemListBaseAdapter extends BaseAdapter
 	        	Intent sendIntent = new Intent();
 	        	sendIntent.setAction(Intent.ACTION_SEND);
 	        	topic=list_details.get(position).getTopic();
+	        	if (list_details.get(position).getDone()==1)
+	        	{
 	        	sendIntent.putExtra(Intent.EXTRA_TEXT, "I Just Completed "+topic+" via TaskNOID");
 	        	sendIntent.setType("text/plain");
 	        	context.startActivity(Intent.createChooser(sendIntent, "Share with"));
+	        	}
 	        	
 	        }
 	    });

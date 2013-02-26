@@ -47,7 +47,15 @@ public class TaskNOIDAppWidgetProvider extends AppWidgetProvider
 			  if(list_details.size()>=(indexCurr+1) && list_details.size()!=0)
 			 {
 				 //Toast.makeText(arg0, String.valueOf(indexCurr)+"size>=int", Toast.LENGTH_LONG).show();
-				 views1.setTextViewText(R.id.widgetTask, list_details.get(indexCurr).getTopic());
+				  if (list_details.get(indexCurr).getDone()==0)
+				  {
+					  views1.setTextViewText(R.id.widgetTask, list_details.get(indexCurr).getTopic());
+				  }
+				  if (list_details.get(indexCurr).getDone()==1)
+				  {
+					  views1.setTextViewText(R.id.widgetTask, (list_details.get(indexCurr).getTopic()+"-Done"));
+				  }
+				 
 				 indexCurr++;
 				 
 			 }
@@ -55,7 +63,16 @@ public class TaskNOIDAppWidgetProvider extends AppWidgetProvider
 			 { 
 				 indexCurr=0; 
 				 //Toast.makeText(arg0, String.valueOf(indexCurr)+"size<int", Toast.LENGTH_LONG).show();
-				 views1.setTextViewText(R.id.widgetTask, list_details.get(indexCurr).getTopic());
+
+				 if (list_details.get(indexCurr).getDone()==0)
+				  {
+					  views1.setTextViewText(R.id.widgetTask, list_details.get(indexCurr).getTopic());
+				  }
+				  if (list_details.get(indexCurr).getDone()==1)
+				  {
+					  views1.setTextViewText(R.id.widgetTask, (list_details.get(indexCurr).getTopic()+"-Done"));
+				  }
+
 			 }
 			 AppWidgetManager manager = AppWidgetManager.getInstance(arg0);
 			 manager.updateAppWidget(temp, views1);

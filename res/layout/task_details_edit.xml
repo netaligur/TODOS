@@ -5,8 +5,8 @@
   android:layout_height="fill_parent"
   android:visibility="visible">
   
-<AbsoluteLayout
-    
+<LinearLayout
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     
@@ -17,8 +17,6 @@
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:layout_x="23dp"
-        android:layout_y="4dp"
         android:text="@string/show_topic"
         android:textColor="#20B2AA"
         android:textSize="14dp"
@@ -30,8 +28,6 @@
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:layout_x="70dp"
-        android:layout_y="4dp"
         android:textSize="14dp"
         android:textStyle="bold"
          />
@@ -41,8 +37,6 @@
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:layout_x="23dp"
-        android:layout_y="23dp"
         android:text="@string/show_description"
         android:textColor="#20B2AA"
         android:textSize="14dp"
@@ -54,8 +48,6 @@
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:layout_x="23dp"
-        android:layout_y="38dp"
         android:textSize="14dp"
         android:textStyle="bold"
          />
@@ -66,8 +58,6 @@
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:layout_x="23dp"
-        android:layout_y="125dp"
         android:text="@string/show_alarm"
         android:textColor="#20B2AA"
         android:textSize="14dp"
@@ -110,5 +100,5 @@
         android:textStyle="bold"
          />
 
-</AbsoluteLayout>
+</LinearLayout>
 </ScrollView>

@@ -130,7 +130,11 @@ public void updateDone (int index)
 {
 	ItemDetails temp;
 	temp=list_details.get(index);
-	temp.setDone(1);
+	if (temp.getDone()==0)
+		{
+			temp.setDone(1);
+		}
+	else temp.setDone(0);
 	db.updateTask(temp);
 }
 }

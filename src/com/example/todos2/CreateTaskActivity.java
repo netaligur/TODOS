@@ -27,6 +27,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -62,7 +63,7 @@ private TextView timeLabel;
 private TextView choosenLocation;
 private CheckBox pickTime;
 private Button create;
-
+private Context context;
 private Button okLocation;
 private EditText editText;
 private EditText topicText;
@@ -83,6 +84,8 @@ private Address addresschoosen;
 private List<Address> listAddress;
 private Geocoder geo;
 private LocationManager locationManager;
+private Calendar 	   myCalendar = Calendar.getInstance();
+private Calendar 	   rightnow   = Calendar.getInstance();
 
 
 
@@ -100,7 +103,7 @@ private LocationManager locationManager;
         
         setContentView(R.layout.activity_create_task);
        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        
+        context=this;
         geo=new Geocoder(this,Locale.getDefault());
         timeLabel=(TextView)findViewById(R.id.show_date1);
         timeLabel.setText("No Date Was Entered");
@@ -168,7 +171,16 @@ private LocationManager locationManager;
         }
         return super.onOptionsItemSelected(item);
     }
-
+    public int testTime()
+    {
+		
+		 if(myCalendar.after(rightnow))
+		 {
+			 
+			 return 1		;
+		 }
+		 	 return 0		;
+	}
 /*button chlicks*/
 	public void onClick(View v) 
 	{
@@ -323,10 +335,9 @@ private LocationManager locationManager;
 				if (fromEdit==false)
 				{
 				DatePickerFragment dPick= new DatePickerFragment();
-				dPick.show(getSupportFragmentManager(), "Select the Date");
+				dPick.show(getSupportFragmentManager(), "Select the Date");			
 				TimePickerFragment tPick =new TimePickerFragment();
-				tPick.show(getSupportFragmentManager(), "Select the Time");
-				flagAlarm=true;	
+				tPick.show(getSupportFragmentManager(), "Select the Time");					
 				}
 				fromEdit=false;
 				flagAlarm=true;
@@ -417,9 +428,8 @@ private LocationManager locationManager;
 				
 			}
 		}*/
-		public  class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener
+		public  class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener,TimePickerDialog.OnCancelListener
 		{
-
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// Use the current time as the default values for the picker
@@ -438,7 +448,7 @@ private LocationManager locationManager;
 				minute=minute1;
 			}
 		}
-		public  class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
+		public  class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener,DatePickerDialog.OnCancelListener
 		{
 
 			@Override
@@ -506,8 +516,13 @@ private LocationManager locationManager;
 				  dialog.dismiss();
 			  }
 			  })
-			   .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-				                	               public void onClick(DialogInterface dialog, int id) { }}
+			   .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener()
+			   {
+				   	public void onClick(DialogInterface dialog, int id) 
+				   	{ 
+				   		//
+				   	}
+				}
 			  )
 		      .create();
 			  IntervalAlarmChoice.show();   

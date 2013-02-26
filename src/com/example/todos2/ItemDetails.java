@@ -16,10 +16,12 @@ public  class ItemDetails
 
 	
 	
-	public String getAddress() {
+	public String getAddress()
+	{
 		return address;
 	}
-	public void setAddress(String address) {
+	public void setAddress(String address)
+	{
 		this.address = address;
 	}
 	public int getYear() {
@@ -120,7 +122,7 @@ public  class ItemDetails
 	}
 	@Override
 	public String toString() {
-		return "\nAlarmed to: " + day + "/" + month + "/"+ year + ",At  " + hour + ":" + minute ;
+		return "Alarmed to: " + day + "/" + month + "/"+ year + ",At  " + hour + ":" + minute ;
 	}
 	public String toStringDialogAlarm() 
 	{
@@ -128,7 +130,11 @@ public  class ItemDetails
 			return "No Alarm Was Set";
 		return day + "/" + month + "/"+ year + ", At  " + hour + ":" + minute ;
 	}
-	public String toStringAddress() {
+	public String toStringAddress() 
+	{
+		if (address==null)
+			return "No Location Was Entered";
+		else
 		return "Location: " + address ;
 	}
 	public String getName()
