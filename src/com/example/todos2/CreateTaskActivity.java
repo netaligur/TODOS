@@ -170,12 +170,16 @@ private Calendar 	   rightnow   = Calendar.getInstance();
         	   choosenLocation.setVisibility(0);
         	   okLocation.setVisibility(4);
         	   /**nnnnnnaaadddaaavvv***/
+        	   if(message.get(7).startsWith("null,")==true)
+        	   {
+        		   String temp = message.get(7).substring(5);
+        		   choosenLocation.setText(temp);
+        		   locationLabel.setText(temp);
+        	   }
         	   okLocation.performClick();
         	   
-        	   }
-        	     
-           } 
-    	  
+          } 
+           }  
     	
     }
     @Override
@@ -339,14 +343,17 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 			  else
 			  {
 			  Calendar cal = Calendar.getInstance();
+			  if (!((year==0 && month==0 && day==0)||(year==0 && month==0 && day==0&&hour==0&& minute==0)))
+				  
+			  	{
+				  	cal.set(year, month-1, day, hour, minute);
 			  
-			  cal.set(year, month-1, day, hour, minute);
-			  
-			  aManager.set(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(), pendingIntent);
+				  	aManager.set(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(), pendingIntent);
+				  	Toast toast = Toast.makeText(this, "will be remember", Toast.LENGTH_SHORT);
+				  	toast.show();
+			  	}
 			  }
-			  
-			 Toast toast = Toast.makeText(this, "will be remember", Toast.LENGTH_SHORT);
-			 toast.show();
+
 			
 		}
 		void setLocationAlarm(int id)
@@ -555,6 +562,9 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 				   	public void onClick(DialogInterface dialog, int id) 
 				   	{ 
 				   		address="No Location Was Entered";
+		        		choosenLocation.setText("No Location Was Entered");
+		        		locationLabel.setText("No Location Was Entered");
+		        		locationBox.setChecked(false);
 				   	}
 				}
 			  )
