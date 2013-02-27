@@ -191,15 +191,13 @@ private Calendar 	   rightnow   = Calendar.getInstance();
         }
         return super.onOptionsItemSelected(item);
     }
-    public int testTime()
-    {
-		
+    public boolean testTime()
+    {		
 		 if(myCalendar.after(rightnow))
 		 {
-			 
-			 return 1		;
+			 return true;
 		 }
-		 	 return 0		;
+		 	 return false;
 	}
 /*button chlicks*/
 	public void onClick(View v) 
@@ -330,6 +328,7 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 			  intent.putExtra(EXTRA_MESSAGE, result_text);
 			  
 			  PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, intent,PendingIntent.FLAG_ONE_SHOT);
+			  myCalendar.set(year,month-1,day,hour,minute);
 			  if(repeatFlag==true)
 			  {
 				
@@ -342,16 +341,22 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 			  }
 			  else
 			  {
-			  Calendar cal = Calendar.getInstance();
-			  if (!((year==0 && month==0 && day==0)||(year==0 && month==0 && day==0&&hour==0&& minute==0)))
-				  
-			  	{
-				  	cal.set(year, month-1, day, hour, minute);
-			  
-				  	aManager.set(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(), pendingIntent);
-				  	Toast toast = Toast.makeText(this, "will be remember", Toast.LENGTH_SHORT);
-				  	toast.show();
-			  	}
+				  if(testTime()==true )
+				  {
+						  Calendar cal = Calendar.getInstance();
+						  if (!((year==0 && month==0 && day==0)||(year==0 && month==0 && day==0&&hour==0&& minute==0)))
+						  {
+						    cal.set(year, month-1, day, hour, minute);
+						  	aManager.set(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(), pendingIntent);
+						  	Toast toast = Toast.makeText(this, "will be remember", Toast.LENGTH_SHORT);
+						  	toast.show();
+						  }
+				  }
+				  else
+				  {
+					  	Toast toast = Toast.makeText(this, "Time for Alarm had Passed,no Alarm will be set", Toast.LENGTH_SHORT);
+					  	toast.show();
+				  }
 			  }
 
 			
