@@ -1,26 +1,34 @@
+/*
+ * @ItemListBaseAdapter        1.0 2013/02/27	
+ *
+ * Copyright 2013 Netali & Nadav, Inc. Neatli Gur & Nadav Taoz All Rights Reserved.
+ * 
+ * This software is the proprietary information of Netali and Nadav- Shenkar College of Engineering and Design
+ */
+
 package com.example.todos2;
 
 import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.content.DialogInterface;
+
+/**
+ * this class is the list view adapter
+ * takes the data from the DB & xml 
+ * and showing it to the user in the
+ * main activity.
+ */
 
 public class ItemListBaseAdapter extends BaseAdapter 
 {

@@ -19,7 +19,7 @@
         android:layout_marginTop="0dp"
         android:text="@string/show_topic"
         android:textColor="#20B2AA"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:textStyle="bold"
          />
     
@@ -28,7 +28,7 @@
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:textStyle="bold"
          />
     
@@ -39,7 +39,7 @@
         android:layout_marginTop="0dp"
         android:text="@string/show_description"
         android:textColor="#20B2AA"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:textStyle="bold"
        />
 	  
@@ -48,7 +48,7 @@
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:textStyle="bold"
          />
       
@@ -60,7 +60,7 @@
         android:layout_marginTop="0dp"
         android:text="@string/show_alarm"
         android:textColor="#20B2AA"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:textStyle="bold"
          />
 
@@ -71,9 +71,9 @@
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
-        android:layout_x="120dp"
-        android:layout_y="125dp"
-        android:textSize="14dp"
+        android:layout_x="120sp"
+        android:layout_y="125sp"
+        android:textSize="14sp"
         android:textStyle="bold"
          />
     <TextView
@@ -85,7 +85,7 @@
         android:layout_y="145dp"
         android:text="@string/show_location"
         android:textColor="#20B2AA"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:textStyle="bold"
          />
 
@@ -94,9 +94,9 @@
         android:layout_width="196dp"
         android:layout_height="31dp"
         android:layout_marginTop="0dp"
-        android:layout_x="96dp"
-        android:layout_y="146dp"
-        android:textSize="14dp"
+        android:layout_x="96sp"
+        android:layout_y="146sp"
+        android:textSize="14sp"
         android:textStyle="bold"
          />
 

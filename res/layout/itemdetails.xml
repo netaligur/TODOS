@@ -15,7 +15,7 @@
          android:shadowDx="1"
          android:shadowDy="1"
          android:shadowRadius="1.5"
-         android:textSize="18dp"
+         android:textSize="18sp"
          android:textStyle="bold"
          tools:context=".DisplayMessageActivity" />
 
@@ -43,7 +43,7 @@
          android:layout_below="@+id/topic"
          android:layout_marginTop="0dp"
          android:textColor="#20B2AA"
-         android:textSize="14dp"
+         android:textSize="14sp"
          android:textStyle="bold"
          tools:context=".DisplayMessageActivity" />
 

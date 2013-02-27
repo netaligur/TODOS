@@ -1,3 +1,11 @@
+/*
+ * @ServiceFromBroadcast       1.0 2013/02/27	
+ *
+ * Copyright 2013 Netali & Nadav, Inc. Neatli Gur & Nadav Taoz All Rights Reserved.
+ * 
+ * This software is the proprietary information of Netali and Nadav- Shenkar College of Engineering and Design
+ */
+
 package com.example.todos2;
 
 import android.content.BroadcastReceiver;

@@ -1,18 +1,33 @@
+/*
+ * @ListController        1.0 2013/02/27	
+ *
+ * Copyright 2013 Netali & Nadav, Inc. Neatli Gur & Nadav Taoz All Rights Reserved.
+ * 
+ * This software is the proprietary information of Netali and Nadav- Shenkar College of Engineering and Design
+ */
+
 package com.example.todos2;
 
 import java.util.LinkedList;
-import java.util.ListIterator;
-
 import android.app.AlarmManager;
 import android.app.ListActivity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-
 import android.database.sqlite.SQLiteDatabase;
 import android.location.LocationManager;
 
-// SINGLETONE //
+/**
+ * this class is managing the Singltone
+ * design pattern, the purpose of this class
+ * is to represent one list of tasks and make 
+ * sure that all of the actions that will
+ * be held on the list will pass through
+ * this class - it's the interface of the
+ * list & DB.
+ *
+ */
+
 public	class	ListController extends ListActivity
 {	
 private int count;

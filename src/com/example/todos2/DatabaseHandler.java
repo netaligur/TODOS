@@ -1,15 +1,27 @@
+/*
+ * @DatabaseHandler        1.0 2013/02/27	
+ *
+ * Copyright 2013 Netali & Nadav, Inc. Neatli Gur & Nadav Taoz All Rights Reserved.
+ * 
+ * This software is the proprietary information of Netali and Nadav- Shenkar College of Engineering and Design
+ */
+
 package com.example.todos2;
 
-
 import java.util.LinkedList;
-
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * this class manage the DB of TaskNOID
+ * application, saving the -
+ * id,details of topic & description,
+ * location,and timing and if the task
+ * is "Done".
+ */
 public class DatabaseHandler extends SQLiteOpenHelper
 {
 	 

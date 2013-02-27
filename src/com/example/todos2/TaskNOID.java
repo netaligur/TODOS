@@ -1,34 +1,38 @@
+/*
+ * @TaskNOID      1.0 2013/02/27	
+ *
+ * Copyright 2013 Netali & Nadav, Inc. Neatli Gur & Nadav Taoz All Rights Reserved.
+ * 
+ * This software is the proprietary information of Netali and Nadav- Shenkar College of Engineering and Design
+ */
+
 package com.example.todos2;
 
 import com.google.analytics.tracking.android.EasyTracker;
-
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import android.location.Address;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ListActivity;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ * this class is the first activity,
+ * the opening activity that fires when
+ * first running the application.
+ * it's managing the first boot steps of
+ * the DB,list view and important variables.
+ * connecting between the activiy_task_noid
+ * xml with the list view with it's adapter.
+ */
 
 public class TaskNOID extends Activity implements View.OnClickListener
 {   

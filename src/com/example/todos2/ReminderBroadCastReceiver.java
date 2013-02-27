@@ -1,3 +1,11 @@
+/*
+ * @ReminderBroadCastReceiver        1.0 2013/02/27	
+ *
+ * Copyright 2013 Netali & Nadav, Inc. Neatli Gur & Nadav Taoz All Rights Reserved.
+ * 
+ * This software is the proprietary information of Netali and Nadav- Shenkar College of Engineering and Design
+ */
+
 package com.example.todos2;
 
 import android.app.Notification;
@@ -6,8 +14,14 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
+
+/**
+ * this class is the receiver of all 
+ * of the out-of-program events and
+ * handles them equally.
+ * events:time alarm & location alarm
+ * 
+ */
 
 public	class	ReminderBroadCastReceiver	extends	BroadcastReceiver	
 {	

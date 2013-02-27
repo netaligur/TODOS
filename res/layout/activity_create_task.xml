@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_x="16dp"
-            android:layout_y="92dp"
+            android:layout_y="140dp"
             android:text="@string/pick_time" />
 
         
@@ -66,19 +66,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:layout_x="167dp"
-            android:layout_y="100dp"
+            android:layout_y="144dp"
             android:textColor="#20B2AA"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:textStyle="bold"  />
 
-        <CheckBox
-            android:textStyle="bold"
-            android:id="@+id/checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="16dp"
-            android:layout_y="140dp"
-            android:text="Repeat Daily" />
+        
         <CheckBox
             android:textStyle="bold"
             android:id="@+id/checkBoxLocation"

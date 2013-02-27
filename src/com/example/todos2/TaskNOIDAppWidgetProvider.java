@@ -1,34 +1,41 @@
+/*
+ * @TaskNOIDAppWidgetProvider      1.0 2013/02/27	
+ *
+ * Copyright 2013 Netali & Nadav, Inc. Neatli Gur & Nadav Taoz All Rights Reserved.
+ * 
+ * This software is the proprietary information of Netali and Nadav- Shenkar College of Engineering and Design
+ */
+
 package com.example.todos2;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * this class represents the app Widget
+ * and does all of it's managing.
+ * 
+ */
+
 public class TaskNOIDAppWidgetProvider extends AppWidgetProvider 
 {
-	private static PendingIntent buttonP;
-	private View v1;
-	private Button next;
-	private ListController list_details;
-	private TextView widgetTasks;
-	private RemoteViews views;
-	public static String ACTION_WIDGET_REFRESH = "ActionReceiverRefresh";
-	private static int indexCurr=0;
-	private static int[] temp;
+	private static PendingIntent	buttonP											;		// the pen' intent 
+	private ListController	 		list_details									;		//
+	private RemoteViews 			views											;		//
+	public static String			ACTION_WIDGET_REFRESH = "ActionReceiverRefresh"	;		//
+	private static int 				indexCurr=0										;		//
+	private static int[] 			temp											;		//
 	@Override
 	public void onReceive(Context arg0, Intent arg1)
 	{
@@ -103,7 +110,7 @@ public class TaskNOIDAppWidgetProvider extends AppWidgetProvider
 	            views.setOnClickPendingIntent(R.id.play_button, pendingIntent);
 	            views.setOnClickPendingIntent(R.id.nextTask, buttonP);
 	            LayoutInflater inflater = LayoutInflater.from(context);
-	            v1=inflater.inflate(R.layout.widget_layout, null);
+	          //  v1=inflater.inflate(R.layout.widget_layout, null);
 	            // Tell the AppWidgetManager to perform an update on the current app widget
 	            list_details=ListController.getInstance(context);
 	    		list_details.boot();

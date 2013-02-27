@@ -1,52 +1,39 @@
+/*
+ * @CreateTaskActivity        1.0 2013/02/27	
+ *
+ * Copyright 2013 Netali & Nadav, Inc. Neatli Gur & Nadav Taoz All Rights Reserved.
+ * 
+ * This software is the proprietary information of Netali and Nadav- Shenkar College of Engineering and Design
+ */
+
 package com.example.todos2;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import android.support.v4.app.FragmentActivity;
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-//import android.app.DialogFragment;
 import android.support.v4.app.DialogFragment;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.NavUtils;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -57,6 +44,15 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import com.google.analytics.tracking.android.EasyTracker;
+
+/**
+ * This class is an activity which handles with adding a new
+ * or when the user is editing a task from the main activity.
+ * handles with tasks:topic,description,setting alarm on Location
+ * or time. (using dialogs - pick date,time and after preesing
+ * ok when entring a location openining a dialog also).
+ */
+
 public class CreateTaskActivity extends FragmentActivity  implements OnClickListener, OnCheckedChangeListener 
 {
 private Button	editLocation;
@@ -69,7 +65,7 @@ private Button okLocation;
 private EditText editText;
 private EditText topicText;
 private EditText locationLabel;
-private CheckBox checkBox;
+//private CheckBox checkBox;
 private CheckBox locationBox;
 private int hour;
 private int minute;
@@ -80,7 +76,7 @@ private AlarmManager aManager;
 private boolean flagAlarm=false;
 private boolean fromEdit=false;
 private boolean locationFlag=false;
-private boolean repeatFlag=false;
+//private boolean repeatFlag=false;
 private String address;
 private Address addresschoosen;
 private List<Address> listAddress;
@@ -129,8 +125,8 @@ private Calendar 	   rightnow   = Calendar.getInstance();
     	editLocation.setOnClickListener(this);
     	//timePicker=(TimePicker)findViewById (R.id.timePicker);
     	//datePicker = (DatePicker)findViewById(R.id.datePicker);
-    	checkBox = (CheckBox)findViewById(R.id.checkBox);
-    	checkBox.setOnCheckedChangeListener(this);
+    	//checkBox = (CheckBox)findViewById(R.id.checkBox);
+    	//checkBox.setOnCheckedChangeListener(this);
     	locationBox = (CheckBox)findViewById(R.id.checkBoxLocation);
     	locationBox.setOnCheckedChangeListener(this);
     	//timePicker.setIs24HourView(true);
@@ -329,7 +325,7 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 			  
 			  PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, intent,PendingIntent.FLAG_ONE_SHOT);
 			  myCalendar.set(year,month-1,day,hour,minute);
-			  if(repeatFlag==true)
+			/*  if(repeatFlag==true)
 			  {
 				
 			        Calendar cal = Calendar.getInstance();
@@ -338,9 +334,9 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 			        cal.set(Calendar.SECOND, 0);
 			        aManager.setRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(), 1000*30, pendingIntent);  
 			        
-			  }
-			  else
-			  {
+			  }*/
+			  //else
+			 // {
 				  if(testTime()==true )
 				  {
 						  Calendar cal = Calendar.getInstance();
@@ -357,7 +353,7 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 					  	Toast toast = Toast.makeText(this, "Time for Alarm had Passed,no Alarm will be set", Toast.LENGTH_SHORT);
 					  	toast.show();
 				  }
-			  }
+			//  }
 
 			
 		}
@@ -416,8 +412,8 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 				//address=(String) locationLabel.getText();
 			    locationFlag=false;
 			}
-			 if(arg0==checkBox && arg1==true) repeatFlag=true;
-			 if(arg0==checkBox && arg1==false)repeatFlag=false;
+			// if(arg0==checkBox && arg1==true) repeatFlag=true;
+			// if(arg0==checkBox && arg1==false)repeatFlag=false;
 				
 			
 		}

@@ -1,4 +1,18 @@
+/*
+ * @ItemDetails        1.0 2013/02/27	
+ *
+ * Copyright 2013 Netali & Nadav, Inc. Neatli Gur & Nadav Taoz All Rights Reserved.
+ * 
+ * This software is the proprietary information of Netali and Nadav- Shenkar College of Engineering and Design
+ */
+
 package com.example.todos2;
+
+/**
+ * this class represents an item on the
+ * list view and each item is a task.
+ * that includes all task attributes.
+ */
 
 public  class ItemDetails 
 {
