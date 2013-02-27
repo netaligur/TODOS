@@ -22,7 +22,7 @@
      <Button
          android:id="@+id/btnDelete"
          android:layout_width="60dp"
-         android:layout_height="25dp"
+         android:layout_height="30dp"
          android:layout_alignParentRight="true"
          android:layout_marginRight="10dp"
          android:onClick="done"
@@ -50,7 +50,7 @@
      <Button
          android:id="@+id/btnDone"
          android:layout_width="60dp"
-         android:layout_height="25dp"
+         android:layout_height="30dp"
          android:layout_alignLeft="@+id/btnDelete"
          android:layout_alignTop="@+id/topic"
          android:background="@drawable/button_save"

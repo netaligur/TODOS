@@ -50,6 +50,7 @@
         android:orientation="vertical" >
         
         <CheckBox
+            android:textStyle="bold"
             android:id="@+id/box_pick_time1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,6 +72,7 @@
             android:textStyle="bold"  />
 
         <CheckBox
+            android:textStyle="bold"
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,6 +80,7 @@
             android:layout_y="140dp"
             android:text="Repeat Daily" />
         <CheckBox
+            android:textStyle="bold"
             android:id="@+id/checkBoxLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,6 +92,7 @@
              xmlns:android="http://schemas.android.com/apk/res/android"
              android:id="@+id/edit_location"
              android:layout_width="218dp"
+             android:hint="Enter Location"
              android:layout_height="55dp"
              android:layout_x="18dp"
              android:layout_y="220dp"
@@ -96,6 +100,7 @@
           <TextView
              xmlns:android="http://schemas.android.com/apk/res/android"
              android:id="@+id/show_choosen_location"
+             android:textStyle="bold"
              android:layout_width="189dp"
              android:layout_height="wrap_content"
              android:layout_x="18dp"

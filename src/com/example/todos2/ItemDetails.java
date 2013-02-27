@@ -6,7 +6,7 @@ public  class ItemDetails
 	private String description;
 	private String topic;
 	private int done=0; /* if done==0 then it's not done*/
-	private int id=0; /*maybe it will be removed*/
+	private int id=0; 
 	private int year;
 	private int month;
 	private int day;
@@ -18,7 +18,11 @@ public  class ItemDetails
 	
 	public String getAddress()
 	{
-		return address;
+		if (address==null)
+			return "No Location Was Entered";
+		else
+		return  address ;
+		
 	}
 	public void setAddress(String address)
 	{
@@ -135,7 +139,7 @@ public  class ItemDetails
 		if (address==null)
 			return "No Location Was Entered";
 		else
-		return "Location: " + address ;
+		return address ;
 	}
 	public String getName()
 	{

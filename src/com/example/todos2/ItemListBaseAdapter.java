@@ -96,6 +96,8 @@ public class ItemListBaseAdapter extends BaseAdapter
 				                	            		temp.add(4,String.valueOf(list_details.get(position).getDay()));
 				                	            		temp.add(5,String.valueOf(list_details.get(position).getHour()));
 				                	            		temp.add(6,String.valueOf(list_details.get(position).getMinute()));
+				       
+				                	            		temp.add(7,(list_details.get(position).getAddress()));
 				                	            		intent.putStringArrayListExtra(EXTRA_MESSAGE,temp);	
 				                	            		list_details.deleteOrgan(position);
 				                	            		context.startActivity(intent);

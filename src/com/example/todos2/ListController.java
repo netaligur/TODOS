@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.location.LocationManager;
 
 // SINGLETONE //
 public	class	ListController extends ListActivity
@@ -24,6 +25,7 @@ private static DatabaseHandler db =null;
 //private	Context context;	
 private static  LinkedList <ItemDetails>list_details;
 private AlarmManager aManager;
+private LocationManager lManager;
 private	ListController(Context context)
 {	 
 	 this.context = context;
@@ -33,6 +35,11 @@ private	ListController(Context context)
 public void setAlarmManager (AlarmManager aManagers)
 {
 	aManager=aManagers;
+	
+}
+public void setLocationManager (LocationManager lManagers)
+{
+	lManager=lManagers;
 	
 }
 public static	ListController getInstance(Context context)
@@ -97,6 +104,7 @@ if (myIntent!=null)
 {
  PendingIntent pendingIntent= PendingIntent.getBroadcast(context,item.getId(), myIntent,PendingIntent.FLAG_ONE_SHOT);
  aManager.cancel(pendingIntent);
+ lManager.removeProximityAlert(pendingIntent);
  }
 list_details.remove(index);
 db.deleteTask(item);

@@ -49,7 +49,9 @@ public class TaskNOID extends Activity implements View.OnClickListener
 		list_details=ListController.getInstance(this);
 		list_details.boot();
 		 AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+		 LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 		 list_details.setAlarmManager(am);
+		 list_details.setLocationManager(lm);
 		//list_details.createTable();										// building the data base table
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_noid);

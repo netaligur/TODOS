@@ -36,6 +36,7 @@ import android.location.Geocoder;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -79,6 +80,7 @@ private AlarmManager aManager;
 private boolean flagAlarm=false;
 private boolean fromEdit=false;
 private boolean locationFlag=false;
+private boolean repeatFlag=false;
 private String address;
 private Address addresschoosen;
 private List<Address> listAddress;
@@ -102,15 +104,15 @@ private Calendar 	   rightnow   = Calendar.getInstance();
         super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_create_task);
-       locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         context=this;
         geo=new Geocoder(this,Locale.getDefault());
         timeLabel=(TextView)findViewById(R.id.show_date1);
         timeLabel.setText("No Date Was Entered");
         timeLabel.setTextColor(Color.RED);
         locationLabel=(EditText)findViewById(R.id.edit_location);
-        locationLabel.setText("Enter Location");
-        locationLabel.setTextColor(Color.RED);
+        //locationLabel.setText("Enter Location");
+        //locationLabel.setTextColor(Color.RED);
         choosenLocation=(TextView)findViewById(R.id.show_choosen_location);
         choosenLocation.setText("No Location Was Entered");
         choosenLocation.setTextColor(Color.RED);
@@ -157,6 +159,20 @@ private Calendar 	   rightnow   = Calendar.getInstance();
         		   		timeLabel.setText( + day + "/" + month + "/"+ year + ",At  " + hour + ":" + minute);
     			        timeLabel.setTextColor(Color.BLUE);
         		}
+        	   if(! (message.get(7).equals("No Location Was Entered")))
+        	   {
+        	   choosenLocation.setText(message.get(7));
+        	   choosenLocation.setTextColor(Color.BLUE);
+        	   locationBox.setChecked(true);
+        	   locationLabel.setVisibility(4);
+        	   locationLabel.setText(message.get(7));
+        	   editLocation.setVisibility(0);
+        	   choosenLocation.setVisibility(0);
+        	   okLocation.setVisibility(4);
+        	   /**nnnnnnaaadddaaavvv***/
+        	   okLocation.performClick();
+        	   
+        	   }
         	     
            } 
     	  
@@ -206,14 +222,27 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 			address=locationLabel.getText().toString();
 			try {
 				listAddress=geo.getFromLocationName(address,5);
-				chooseAddress(listAddress);
 				
-			} catch (IOException e) {
+				
+			} 
+			catch (IOException e) 
+			{
 				// TODO Auto-generated catch block
-				System.out.println("cautch on bad laction");
-				
-				e.printStackTrace();
+				 Toast.makeText(context,"Problem Had Occured,Check Your Intenet Connection",Toast.LENGTH_SHORT).show();
+					e.printStackTrace();
+					address="No Location Was Entered";
+					return;
 			}
+			 if(listAddress.isEmpty())
+             {
+				 Toast.makeText(context,"Sorry, Couldn't Find The Location",Toast.LENGTH_SHORT).show();
+				 address="No Location Was Entered";
+             }
+        	 else{
+        		 
+        		 chooseAddress(listAddress);
+
+        	 }
 		
 			
 		}
@@ -283,6 +312,7 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 		if (locationFlag==true)
 		{
 			setLocationAlarm(item.getId());
+			
 			locationFlag=false;
 		}
 		startActivity(intent);
@@ -291,37 +321,38 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 		private void setTimeAlarm(int id) 
 		{
 			  Intent intent = new Intent(this, ReminderBroadCastReceiver.class);
-			  String result_text=editText.getText().toString();
+			  String result_text=topicText.getText().toString();
 			  
 			  intent.putExtra(EXTRA_MESSAGE, result_text);
 			  
-			  PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, intent, PendingIntent.FLAG_ONE_SHOT);
-			  if(checkBox.isChecked())
+			  PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, intent,PendingIntent.FLAG_ONE_SHOT);
+			  if(repeatFlag==true)
 			  {
 				
 			        Calendar cal = Calendar.getInstance();
 			        cal.set(Calendar.HOUR_OF_DAY,hour);
 			        cal.set(Calendar.MINUTE,minute);
 			        cal.set(Calendar.SECOND, 0);
-			       
-			       aManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);  
+			        aManager.setRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(), 1000*30, pendingIntent);  
 			        
 			  }
-			  else{
+			  else
+			  {
 			  Calendar cal = Calendar.getInstance();
 			  
 			  cal.set(year, month-1, day, hour, minute);
 			  
-			  aManager.set(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(), pendingIntent);}
+			  aManager.set(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(), pendingIntent);
+			  }
 			  
-			  Toast toast = Toast.makeText(this, "will be remember", Toast.LENGTH_SHORT);
-			  toast.show();
+			 Toast toast = Toast.makeText(this, "will be remember", Toast.LENGTH_SHORT);
+			 toast.show();
 			
 		}
 		void setLocationAlarm(int id)
 		{
 			  Intent intent = new Intent(this, ReminderBroadCastReceiver.class);
-			  String result_text=editText.getText().toString();
+			  String result_text=topicText.getText().toString();
 			  intent.putExtra(EXTRA_MESSAGE, result_text);
 			
 			 PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, intent, PendingIntent.FLAG_ONE_SHOT);
@@ -365,16 +396,18 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 			{
 				locationLabel.setVisibility(4);
 				okLocation.setVisibility(4);
-				
+				editLocation.setVisibility(4);
 				choosenLocation.setVisibility(0);
 				choosenLocation.setText("No Location Was Entered");
 				address="No Location Was Entered";
 			    choosenLocation.setTextColor(Color.RED);
 				//address=(String) locationLabel.getText();
 			    locationFlag=false;
-			   
-				
 			}
+			 if(arg0==checkBox && arg1==true) repeatFlag=true;
+			 if(arg0==checkBox && arg1==false)repeatFlag=false;
+				
+			
 		}
 	
 		/*private class GetFromWebTask extends AsyncTask<URL, Integer , String>
@@ -484,9 +517,10 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 			 {
 				    Address address = listAddress.get(i);
 				    StringBuilder stringBuilder = new StringBuilder();
-				    
-				    	stringBuilder.append(address.getAddressLine(1)).append(", ").append(address.getAddressLine(0)); 
-				    	listItems.add(stringBuilder.toString());
+				    stringBuilder.append(address.getAddressLine(1)).append(", ").append(address.getAddressLine(0)); 
+				    listItems.add(stringBuilder.toString());
+				    	
+				    	
 				   
 				 /*   else
 				    {
@@ -511,7 +545,7 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 				  address=listItems.get(place);
 				  okLocation.setVisibility(4);
 				  editLocation.setVisibility(0);
-				  locationFlag=true;				  
+				  locationFlag=true;			  
 				  addresschoosen= listAddress.get(place);
 				  dialog.dismiss();
 			  }
@@ -520,7 +554,7 @@ private Calendar 	   rightnow   = Calendar.getInstance();
 			   {
 				   	public void onClick(DialogInterface dialog, int id) 
 				   	{ 
-				   		//
+				   		address="No Location Was Entered";
 				   	}
 				}
 			  )
