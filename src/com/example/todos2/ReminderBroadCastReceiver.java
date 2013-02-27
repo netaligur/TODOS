@@ -26,35 +26,25 @@ import android.content.Intent;
 public	class	ReminderBroadCastReceiver	extends	BroadcastReceiver	
 {	
 private NotificationManager notificationManager;
-	
-	
+/**
+ * This function is invoked when an notification is
+ * coming - time alarm or location alarm
+ * 
+ */
 	public void onReceive(Context context, Intent intent) 
-	{
-		
-		 String message  = intent.getStringExtra(CreateTaskActivity.EXTRA_MESSAGE);
-		
-		 notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		 
-		 CharSequence from = "TaskNOID";
-				  
-		 Intent intent2 = new Intent(context, TaskNOID.class);
-		 
-		 PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent2 , 0);
- 
-		 Notification notif = new Notification(R.drawable.arik_rat,message, System.currentTimeMillis());
-		
-		 notif.setLatestEventInfo(context, from, message, contentIntent);
-		 
-		 notif.defaults |= Notification.DEFAULT_SOUND;
-		 
-		 notif.flags |= Notification.FLAG_AUTO_CANCEL;
-		 
-		 
-		
-		 notificationManager.notify(0, notif);
-		 
-    }
-	
+	{		
+		/* Extracting the Topic from the task of the alarm */
+		String message  = intent.getStringExtra(CreateTaskActivity.EXTRA_MESSAGE);							
+		notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);	// Initializing notification manager	 
+		CharSequence from = "TaskNOID";				  
+		Intent intent2 = new Intent(context, TaskNOID.class);		 
+		PendingIntent contentIntent = PendingIntent.getActivity(context, 0, intent2 , 0);
+		Notification notif = new Notification(R.drawable.arik_rat,message, System.currentTimeMillis());		// The image of the notification
+		notif.setLatestEventInfo(context, from, message, contentIntent);		 
+		notif.defaults |= Notification.DEFAULT_SOUND;		 												// The sound of the notification
+		notif.flags |= Notification.FLAG_AUTO_CANCEL;
+		notificationManager.notify(0, notif);																// Doing the notify 
+    }	
 }
 
 

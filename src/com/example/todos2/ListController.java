@@ -30,134 +30,131 @@ import android.location.LocationManager;
 
 public	class	ListController extends ListActivity
 {	
-private int count;
-private Context context;
-private	static	ListController	instance	=	null;
-private static DatabaseHandler db =null;
-  SQLiteDatabase tasksDB = null;
-  private boolean edit=false;
-  private int index;
-//private	Context context;	
-private static  LinkedList <ItemDetails>list_details;
-private AlarmManager aManager;
-private LocationManager lManager;
-private	ListController(Context context)
-{	 
-	 this.context = context;
-	 db = new DatabaseHandler(context);
-	 list_details = new  LinkedList<ItemDetails>();
-}	
-public void setAlarmManager (AlarmManager aManagers)
-{
-	aManager=aManagers;
-	
-}
-public void setLocationManager (LocationManager lManagers)
-{
-	lManager=lManagers;
-	
-}
-public static	ListController getInstance(Context context)
-{	
-	
-	if(instance	==	null)
+private int 								count										;	// How many items there are in the list
+private Context 							context										;	// For saving the context
+private	static	ListController				instance=null								;	// Single Instance of the class
+private static DatabaseHandler 				db=null										;	// DB manager handler
+SQLiteDatabase							 	tasksDB=null								;	// DB SQLite instance
+private boolean 							edit=false									;	
+private int 								index										;	// The item index
+private static  							LinkedList <ItemDetails>list_details		;	// The list itself
+private AlarmManager			        	aManager									;	// Alarm manager
+private LocationManager 					lManager									;	// Location manager
+	/* Constructor which get context,Doing first initializations */
+	private	ListController(Context context)
+	{	 
+		 this.context = context;									// Setting the context 
+		 db = new DatabaseHandler(context);							// Initializing DB
+		 list_details = new  LinkedList<ItemDetails>();				// Creating the List
+	}	
+	/* Sets the Alarm Manager */
+	public void setAlarmManager (AlarmManager aManagers)
+	{
+		aManager=aManagers;	
+	}
+	/* Sets the Location Manager */
+	public void setLocationManager (LocationManager lManagers)
+	{
+		lManager=lManagers;
+	}
+	/* Doing the instantiation of the class (Singleton) */
+	public static	ListController getInstance(Context context)
+	{	
+		/* New instance condition */
+		if(instance	==	null)
 		{	
 			instance	=	new ListController(context);	
 		}	
-
-	return	instance;							
-}	
-public void boot()
-{
-	int max=0;
-	
-	list_details=db.getAllTasks();
-	 for (ItemDetails temp:list_details)
-	 {
-		 if (max<temp.getId())
-			 max=temp.getId();
-	 }
-	
-	count=max;
-	
-}
-
-
-public void addOrgan(ItemDetails item)
-{
-	
-	item.setId(++count);
-	//String name=item.getName();
-	item.setDone(0);
-	list_details.addFirst(item);
-	System.out.println(item.getTopic()+item.toString());
-	db.addTask(new ItemDetails(item));
-}
-public ItemDetails get(int position)
-{
-	
-	return list_details.get(position);
-	
-}
-public int size()
-{
-	
-	return list_details.size();
-}
-public static  boolean isOn()
-{
-	if(instance	==	null)
-		return false;
-	return true;
-}
-public void deleteOrgan (int index)
-{
-	
-ItemDetails item=list_details.get(index);
-Intent myIntent = new Intent(context, ReminderBroadCastReceiver.class);
-if (myIntent!=null)
-{
- PendingIntent pendingIntent= PendingIntent.getBroadcast(context,item.getId(), myIntent,PendingIntent.FLAG_ONE_SHOT);
- aManager.cancel(pendingIntent);
- lManager.removeProximityAlert(pendingIntent);
- }
-list_details.remove(index);
-db.deleteTask(item);
-
-}
-/*****/
-public void editOrgan (int index)
-{
-	edit=true;
-	this.index=index;
-
-
-}
-public boolean isEdit() {
-	return edit;
-}
-
-public void setEdit(boolean edit) {
-	this.edit = edit;
-}
-
-public int getIndex() {
-	return index;
-}
-
-public void setIndex(int index) {
-	this.index = index;
-}
-
-public void updateDone (int index)
-{
-	ItemDetails temp;
-	temp=list_details.get(index);
-	if (temp.getDone()==0)
+		/* Returning the instance of the new object or the instance of the exiting object */
+		return	instance;							
+	}	
+	/* Does the initialization of the list(tasks) from the DB and updating the max id */
+	public void boot()
+	{
+		int max=0;
+		list_details=db.getAllTasks();								// Gets the tasks from the DB
+		/* Loop for updating the most id existing */
+		for (ItemDetails temp:list_details)
+		{
+			if (max<temp.getId()) max=temp.getId();
+		}
+		count=max;	
+	}
+/**
+* Function for adding a new item to the list(updating the list + DB)
+*/	
+	public void addOrgan(ItemDetails item)
+	{		
+		item.setId(++count);										// Setting a new id from count + 1
+		item.setDone(0);											// Set the new task to not-done
+		list_details.addFirst(item);								// Adding the item in the beginning of the list
+		db.addTask(new ItemDetails(item));							// Updates the DB
+	}
+	/* Returns item at position */
+	public ItemDetails get(int position)
+	{	
+		return list_details.get(position);		
+	}
+	/* Returns the size of the list */
+	public int size()
+	{	
+		return list_details.size();
+	}
+	/* For check if there is an instance or not */
+	public static  boolean isOn()
+	{
+		if(instance	==	null)
+			return false;
+		return true;
+	}
+	/* Deleting an item from the list and DB */
+	public void deleteOrgan (int index)
+	{		
+		ItemDetails item=list_details.get(index);									// Gets the item 
+		/* Checking whether there upcomming event from that item (with the id as an intent identifier) if there is-cancel it */
+		Intent myIntent = new Intent(context, ReminderBroadCastReceiver.class);		
+		if (myIntent!=null)
+		{
+			 PendingIntent pendingIntent= PendingIntent.getBroadcast(context,item.getId(), myIntent,PendingIntent.FLAG_ONE_SHOT);
+			 aManager.cancel(pendingIntent);										// Cancel time notification - if there is
+			 lManager.removeProximityAlert(pendingIntent);							// Cancel location notification - if there is
+		}
+		list_details.remove(index);													// Delete from the list
+		db.deleteTask(item);														// Delete from DB
+		
+	}
+	/* Dealing with edit an organ */
+	public void editOrgan (int index)
+	{
+		edit=true;													
+		this.index=index;
+	}
+	/* Checking if the organ is edit */
+	public boolean isEdit() {
+		return edit;
+	}
+	/* Setting edit */
+	public void setEdit(boolean edit) {
+		this.edit = edit;
+	}
+	/* Getting the index */
+	public int getIndex() {
+		return index;
+	}
+	/* Setting the index */
+	public void setIndex(int index) {
+		this.index = index;
+	}
+	/* Update that the task is no "Done" or sets from done to undone */
+	public void updateDone (int index)
+	{
+		ItemDetails temp;
+		temp=list_details.get(index);
+		if (temp.getDone()==0)
 		{
 			temp.setDone(1);
 		}
-	else temp.setDone(0);
-	db.updateTask(temp);
-}
+		else temp.setDone(0);
+		db.updateTask(temp);
+	}
 }

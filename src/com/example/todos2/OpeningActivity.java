@@ -15,9 +15,8 @@ import android.view.Menu;
 import android.view.ViewGroup;
 
 /**
- * this class holds the main application
- * it's makes connection between the GUI and
- * the XML by summoning their constructor
+ * this class is a preparation for a future opening activity
+ * right now this is only the foundations
  */
 
 public class OpeningActivity extends Activity {
@@ -25,14 +24,7 @@ public class OpeningActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       //LayoutInflater inflater = (LayoutInflater)getSystemService(this.LAYOUT_INFLATER_SERVICE);
-        //ViewGroup vg = (ViewGroup) inflater.inflate(R.layout.activity_opening, null);
-       // setContentView(vg);
-        //setContentView(R.layout.activity_opening);
-       
-        Intent intent = new Intent(this, TaskNOID.class);
-      
-       
+        Intent intent = new Intent(this, TaskNOID.class);    
         startActivity(intent);
     }
 

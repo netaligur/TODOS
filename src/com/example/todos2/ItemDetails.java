@@ -15,29 +15,26 @@ package com.example.todos2;
  */
 
 public  class ItemDetails 
-{
-	
-	private String description;
-	private String topic;
-	private int done=0; /* if done==0 then it's not done*/
-	private int id=0; 
-	private int year;
-	private int month;
-	private int day;
-	private int hour;
-	private int minute;
-	private String address;
+{	
+	private String 			description			; // Description of the task	
+	private String 			topic				; // Title \ Topic
+	private int 			done=0				; // if done==0 then it's not done
+	private int 			id=0				; // Task's id
+	private int 			year				; // Year
+	private int				month				; // Month
+	private int 			day					; // Day
+	private int 			hour				; // Hour
+	private int 			minute				; // Minute
+	private String 			address				; // Address \ Location
 
-	
-	
 	public String getAddress()
 	{
-		if (address==null)
+		if (address==null)						  // No location = returns default location
 			return "No Location Was Entered";
 		else
-		return  address ;
-		
+		return  address ;		
 	}
+	/* Setters and Getters to the variables of the class */
 	public void setAddress(String address)
 	{
 		this.address = address;
@@ -90,6 +87,15 @@ public  class ItemDetails
 	public void setTopic(String topic) {
 		this.topic = topic;
 	}
+	public String getName()
+	{
+		return description;
+	}
+	public void setName(String descriptionName) 
+	{
+		this.description = descriptionName;
+	}
+	/* Constructors - Copy Comstructor */
 	public ItemDetails (ItemDetails item)
 	{
 		this.description=item.getName();
@@ -103,6 +109,7 @@ public  class ItemDetails
 		this.year=item.year;
 		this.address=item.address;
 	}
+	/* Default Constructor */
 	public ItemDetails() {
 		this.description="no description";
 		this.topic="no topic";
@@ -114,6 +121,7 @@ public  class ItemDetails
 		this.year=0;
 		this.address="no address";
 	}
+	/* Constructor from string */
 	public ItemDetails(String description) {
 		super();
 		this.description = description;
@@ -126,6 +134,7 @@ public  class ItemDetails
 		this.year=0;
 		this.address="no address";
 	}
+	/* Half Constructor */
 	public ItemDetails(String description,String topic) {
 		super();
 		this.description = description;
@@ -138,6 +147,7 @@ public  class ItemDetails
 		this.year=0;
 		this.address="no address";
 	}
+	/* Print methods */
 	@Override
 	public String toString() {
 		return "Alarmed to: " + day + "/" + month + "/"+ year + ",At  " + hour + ":" + minute ;
@@ -154,15 +164,5 @@ public  class ItemDetails
 			return "No Location Was Entered";
 		else
 		return address ;
-	}
-	public String getName()
-	{
-		return description;
-	}
-	public void setName(String descriptionName) 
-	{
-		this.description = descriptionName;
-	}
-	
-	
+	}	
 }
