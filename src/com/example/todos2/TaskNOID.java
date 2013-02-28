@@ -8,6 +8,7 @@
 
 package com.example.todos2;
 
+import co.il.shenkar.tasknoid.R;
 import com.google.analytics.tracking.android.EasyTracker;
 import java.util.ArrayList;
 import android.location.LocationManager;

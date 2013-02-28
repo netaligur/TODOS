@@ -43,6 +43,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import co.il.shenkar.tasknoid.R;
 import com.google.analytics.tracking.android.EasyTracker;
 
 /**

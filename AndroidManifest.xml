@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.todos2"
+    package="co.il.shenkar.tasknoid"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme" >
         
         <activity
-            android:name=".OpeningActivity"
+            android:name="com.example.todos2.OpeningActivity"
              
           android:label="@string/title_activity_opening" >
             <intent-filter>
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CreateTaskActivity"
+            android:name="com.example.todos2.CreateTaskActivity"
          	android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_create_task" >
          <!-- -    <intent-filter> 
@@ -39,14 +39,14 @@
 
      <!--   <service android:name=".MyService" />-->
 
-        <receiver android:name=".ServiceFromBroadcast" />
-        <receiver android:name=".ReminderBroadCastReceiver" >
+        <receiver android:name="com.example.todos2.ServiceFromBroadcast" />
+        <receiver android:name="com.example.todos2.ReminderBroadCastReceiver" >
             <intent-filter>
                 <action android:name="com.r_.reminder_broadcast" />
             </intent-filter>
         </receiver>
 		<receiver 
-		    android:name="TaskNOIDAppWidgetProvider"
+		    android:name="com.example.todos2.TaskNOIDAppWidgetProvider"
 		    android:label="TaskNOID Widget "
 		    android:exported="false"
 		    >
@@ -61,7 +61,7 @@
 		</receiver>
 
       	  <activity
-            android:name=".TaskNOID"
+            android:name="com.example.todos2.TaskNOID"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_task_noid" >
             

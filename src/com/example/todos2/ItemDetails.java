@@ -8,6 +8,8 @@
 
 package com.example.todos2;
 
+import co.il.shenkar.tasknoid.R;
+
 /**
  * this class represents an item on the
  * list view and each item is a task.

@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.LocationManager;
+import co.il.shenkar.tasknoid.R;
 
 /**
  * this class is managing the Singltone

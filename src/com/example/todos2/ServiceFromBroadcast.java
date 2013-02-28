@@ -11,6 +11,7 @@ package com.example.todos2;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import co.il.shenkar.tasknoid.R;
 
 public class ServiceFromBroadcast extends BroadcastReceiver 
 {

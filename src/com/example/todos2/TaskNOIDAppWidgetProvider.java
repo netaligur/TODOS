@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.os.SystemClock;
 import android.widget.RemoteViews;
 import android.widget.Toast;
+import co.il.shenkar.tasknoid.R;
 
 /**
  * this class represents the app Widget

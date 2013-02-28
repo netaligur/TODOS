@@ -22,6 +22,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.content.DialogInterface;
+import co.il.shenkar.tasknoid.R;
 
 /**
  * this class is the list view adapter

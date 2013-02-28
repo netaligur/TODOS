@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.ViewGroup;
+import co.il.shenkar.tasknoid.R;
 
 /**
  * this class is a preparation for a future opening activity
