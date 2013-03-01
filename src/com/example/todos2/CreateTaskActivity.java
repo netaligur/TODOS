@@ -208,7 +208,7 @@ public final static String EXTRA_MESSAGE2 = "com.example.todos2.CreateTaskActivi
 			/* Will return an error if the geo coder has error */
 			catch (IOException e) 
 			{
-				// TODO Auto-generated catch block
+				// TODO Auto-generated catch block //
 				Toast.makeText(context,"Problem Had Occured,Check Your Intenet Connection",Toast.LENGTH_SHORT).show();
 				e.printStackTrace();
 				address="No Location Was Entered";
