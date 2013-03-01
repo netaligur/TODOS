@@ -9,6 +9,10 @@
 package com.example.todos2;
 
 import java.util.ArrayList;
+
+import com.google.analytics.tracking.android.GoogleAnalytics;
+import com.google.analytics.tracking.android.Tracker;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -63,6 +67,10 @@ public class ItemListBaseAdapter extends BaseAdapter
 	/* Inflating an item in the list,Managing it's dialog box */
 	public View getView(final int position, View convertView, ViewGroup parent)
 	{
+		
+		GoogleAnalytics myGoogleAnal = GoogleAnalytics.getInstance(context);
+        /* Starts the tracker using the google singleton.*/
+        final Tracker myTracker = myGoogleAnal.getTracker(context.getString(R.string.google_analytic_id));	 		// Placeholder tracking ID from Strings XML 
 		ViewHolder holder;
 		/* If There is no item in the view */
 		if (convertView == null)
@@ -71,7 +79,8 @@ public class ItemListBaseAdapter extends BaseAdapter
 			convertView.setClickable(true);											// Setting the item view so the user can press it
 			convertView.setOnClickListener(new OnClickListener() {					// Open dialog when clicking a list item
 			public void onClick(View paramView)
-			{		                    
+			{		 
+				myTracker.sendEvent("ui_action", "click_on_task", "show_details_of_task", null);
 				AlertDialog dialogBox = OptionsDialogBox(list_details.get(position),paramView); // Setting the dialog box item
 				dialogBox.show();																// Showing the dialog box
 				/* Initializing all of the elements of the task in the dialog box */
@@ -95,6 +104,7 @@ public class ItemListBaseAdapter extends BaseAdapter
 				/* On Click on the positive button - "Edit " - doing all of the actions need for start the create task activity */
 				public void onClick(DialogInterface dialog, int id)
 				{
+					myTracker.sendEvent("ui_action", "button_press", "edit_task_pressed", null);
 				    Intent intent = new Intent(context, CreateTaskActivity.class);
 				    ArrayList <String>  temp= new ArrayList<String>();				// String array for putting in the intent
 				    /* Setting the list with all of the task details and put it in the intent */
@@ -134,28 +144,25 @@ public class ItemListBaseAdapter extends BaseAdapter
 			holder = (ViewHolder) convertView.getTag();
 		}
 		String date;
-		date=" "+list_details.get(position).toString();	
+		String DescriptionDateAndLocation;
+		date=list_details.get(position).toString();	
+		DescriptionDateAndLocation=date+"\nLocation: "+ list_details.get(position).toStringAddress();
 		/* All of this conditions are responsible to represent the task with a line if it's done */
 		/* No Done */
 		if (list_details.get(position).getDone()==0)
 		{
-				/* Checks if needs to print the time alarm */
-				if(list_details.get(position).getYear()!=0 && list_details.get(position).getMonth()!=0 && list_details.get(position).getDay()!=0)
-					holder.txt_itemDescription.setText(date);					
-			    else holder.txt_itemDescription.setText("");
-				/* Sets flags in all fields - no line through */
-				holder.txt_itemDescription.setPaintFlags( holder.txt_itemDescription.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
-				holder.txt_itemTopic.setPaintFlags( holder.txt_itemTopic.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
-				holder.txt_itemTopic.setText(list_details.get(position).getTopic());
+			/* Location & time alarms - set in field */				
+			holder.txt_itemDescription.setText(DescriptionDateAndLocation);								  
+			/* Sets flags in all fields - no line through */
+			holder.txt_itemDescription.setPaintFlags( holder.txt_itemDescription.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
+			holder.txt_itemTopic.setPaintFlags( holder.txt_itemTopic.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
+			holder.txt_itemTopic.setText(list_details.get(position).getTopic());
 		}
 		/* The task is done */
 		if (list_details.get(position).getDone()==1)
 		{
-			/* Checks if needs to print the time alarm */
-			if (list_details.get(position).getYear()!=0 && list_details.get(position).getMonth()!=0 && list_details.get(position).getDay()!=0)
-				holder.txt_itemDescription.setText(date);
-			else 
-				holder.txt_itemDescription.setText("");	
+			/* Location & time alarms - set in field */			
+			holder.txt_itemDescription.setText(DescriptionDateAndLocation);
 			/* Sets flags in all fields - line through */
 			holder.txt_itemDescription.setPaintFlags(holder.txt_itemDescription.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 			holder.txt_itemTopic.setText(list_details.get(position).getTopic());
@@ -166,6 +173,7 @@ public class ItemListBaseAdapter extends BaseAdapter
 	 	{	
 	        public void onClick(View v)
 	        {
+	        	myTracker.sendEvent("ui_action", "button_press", "delete_button_pressed", null);
 	        	list_details.deleteOrgan(position);						// Deleting the item
 	        	notifyDataSetChanged();
 	        }
@@ -175,6 +183,7 @@ public class ItemListBaseAdapter extends BaseAdapter
 	 	{	
 	        public void onClick(View v) 
 	        {
+	        	myTracker.sendEvent("ui_action", "button_press", "done_task_pressed", null);
 	        	list_details.updateDone(position);
 	        	notifyDataSetChanged();
 	        	Intent sendIntent = new Intent();

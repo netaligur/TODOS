@@ -45,6 +45,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import co.il.shenkar.tasknoid.R;
 import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.GoogleAnalytics;
+import com.google.analytics.tracking.android.Tracker;
 
 /**
  * This class is an activity which handles with adding a new
@@ -56,6 +58,8 @@ import com.google.analytics.tracking.android.EasyTracker;
 
 public class CreateTaskActivity extends FragmentActivity  implements OnClickListener, OnCheckedChangeListener 
 {
+private Tracker 					myTracker								;	// Tracker from analytics
+private GoogleAnalytics 			myGoogleAnal							;	// Managar google analytics	
 private Button						editLocation							;	// Button "change" for edit location after set
 private TextView 					timeLabel								;	// Represents the time the user picked
 private TextView 					choosenLocation							;	// Represents the location the user picked
@@ -126,6 +130,9 @@ public final static String EXTRA_MESSAGE2 = "com.example.todos2.CreateTaskActivi
     	topicText=(EditText)findViewById(R.id.edit_topic);
     	Intent intent = getIntent();
     	ArrayList<String>message = intent.getStringArrayListExtra(CreateTaskActivity.EXTRA_MESSAGE2);
+        myGoogleAnal = GoogleAnalytics.getInstance(this);
+        /* Starts the tracker using the google singleton.*/
+        myTracker = myGoogleAnal.getTracker(getString(R.string.google_analytic_id));	 		// Placeholder tracking ID from Strings XML 
     	/* For checking if the activity was invoked from edit task in the main */
     	if (message!=null)
         {
@@ -192,6 +199,7 @@ public final static String EXTRA_MESSAGE2 = "com.example.todos2.CreateTaskActivi
 		/* Pressing on "OK" for location */
 		if (v.getId()==R.id.okLocation)
 		{
+			myTracker.sendEvent("ui_action", "button_press", "add_location_pressed", null);
 			address=locationLabel.getText().toString();						// Set the field
 			try 
 			{
@@ -221,6 +229,7 @@ public final static String EXTRA_MESSAGE2 = "com.example.todos2.CreateTaskActivi
 		/* Change location button was pressed - setting the UI elements accordingly*/
 		if (v.getId()==R.id.editLocation)
 		{
+			myTracker.sendEvent("ui_action", "button_press", "change_location_press", null);
 			locationLabel.setVisibility(0);
 			okLocation.setVisibility(0);  							// 0=Visible and 4 not 
 			choosenLocation.setVisibility(4);
@@ -230,6 +239,7 @@ public final static String EXTRA_MESSAGE2 = "com.example.todos2.CreateTaskActivi
 		/* "Save" button was pressed - making the preparations for saving the task in the list*/
 		if (v.getId()==R.id.button_create)
 		{		
+		myTracker.sendEvent("ui_action", "button_press", "save_task_pressed", null);	
 		Intent intent = new Intent(this,TaskNOID.class);
 		String result_text=editText.getText().toString();			// Getting the description from the field
 		String topic_text=topicText.getText().toString();			// Getting the topic from the field
@@ -306,7 +316,7 @@ public final static String EXTRA_MESSAGE2 = "com.example.todos2.CreateTaskActivi
 		intent.putExtra(EXTRA_MESSAGE, result_text);		
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, intent, PendingIntent.FLAG_ONE_SHOT);
 		addresschoosen.getLatitude();
-		locationManager.addProximityAlert(addresschoosen.getLatitude(), addresschoosen.getLongitude(),50,-1,pendingIntent );
+		locationManager.addProximityAlert(addresschoosen.getLatitude(), addresschoosen.getLongitude(),500,-1,pendingIntent );
 	}	
 	/* For Checkboxes */
 	public void onCheckedChanged(CompoundButton arg0, boolean arg1) 
@@ -314,8 +324,9 @@ public final static String EXTRA_MESSAGE2 = "com.example.todos2.CreateTaskActivi
 		if((arg1)&&(arg0==pickTime))										// If picktime box is set
 		{
 			/* If the task was not from edit from main - will activate the pickers dialogs - one after the other */
-			if (fromEdit==false)											
+			if (fromEdit==false)		
 			{
+				myTracker.sendEvent("ui_action", "check_box_press", "pick_time_checked", null);
 				DatePickerFragment dPick= new DatePickerFragment();
 				dPick.show(getSupportFragmentManager(), "Select the Date");	// Date picker dialog		
 				TimePickerFragment tPick =new TimePickerFragment();
@@ -338,6 +349,7 @@ public final static String EXTRA_MESSAGE2 = "com.example.todos2.CreateTaskActivi
 		 }
 		 if (arg0==locationBox && arg1==true)								// If location box is on - changes the UI accordingly
 		 {
+			myTracker.sendEvent("ui_action", "check_box_press", "add_location_preesed", null); 
 			locationLabel.setVisibility(0);
 			okLocation.setVisibility(0);  									// 0=Visible and 4 not 
 			choosenLocation.setVisibility(4);

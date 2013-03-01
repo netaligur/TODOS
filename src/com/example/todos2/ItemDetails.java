@@ -152,7 +152,9 @@ public  class ItemDetails
 	/* Print methods */
 	@Override
 	public String toString() {
-		return "Alarmed to: " + day + "/" + month + "/"+ year + ",At  " + hour + ":" + minute ;
+		if (day==0 && month==0 && year==0)
+			return "Alarmed to: "+"No Alarm Was Set";
+		return "Alarmed to: " + day + "/" + month + "/"+ year + ",At  " + hour + ":" + minute;
 	}
 	public String toStringDialogAlarm() 
 	{

@@ -97,6 +97,7 @@ public final class R {
         /** Replace placeholder ID with your tracking ID
          */
         public static final int ga_trackingId=0x7f050000;
+        public static final int google_analytic_id=0x7f050018;
         public static final int hello_world=0x7f050008;
         public static final int menu_settings=0x7f050002;
         public static final int pick_time=0x7f05000a;

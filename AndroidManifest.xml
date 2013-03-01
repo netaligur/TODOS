@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="co.il.shenkar.tasknoid"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="1.1" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -29,7 +29,8 @@
         <activity
             android:name="com.example.todos2.CreateTaskActivity"
          	android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_create_task" >
+            android:label="@string/title_activity_create_task" 
+            android:windowSoftInputMode="stateHidden">
          <!-- -    <intent-filter> 
                 <action android:name="android.intent.action.MAIN" />
 

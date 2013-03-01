@@ -10,6 +10,9 @@ package com.example.todos2;
 
 import co.il.shenkar.tasknoid.R;
 import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.GoogleAnalytics;
+import com.google.analytics.tracking.android.Tracker;
+
 import java.util.ArrayList;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -40,6 +43,8 @@ public class TaskNOID extends Activity implements View.OnClickListener
 	public static final String		ONE_TIME = ""												;
 	private ListController 			list_details												;	// The single instance of the list
 	public final static String	    EXTRA_MESSAGE = "com.example.todos2.CreateTaskActivity"		;	
+	private Tracker 				myTracker													;	// Tracker from analytics
+	private GoogleAnalytics 		myGoogleAnal												;	// Managar google analytics
 	
 /**
 * For the Google Analytics 
@@ -50,6 +55,15 @@ public class TaskNOID extends Activity implements View.OnClickListener
 	{
 		super.onStart();
 		EasyTracker.getInstance().activityStart(this);  
+	}
+	/* pressing the back button - causing the app to crash */
+	@Override
+	public void onBackPressed() 
+	{	  
+		Intent intent = new Intent(Intent.ACTION_MAIN);
+		intent.addCategory(Intent.CATEGORY_HOME);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);	  
 	}
 /**
 * Initializing all important managers and variables, connection to the xml. 
@@ -65,8 +79,11 @@ public class TaskNOID extends Activity implements View.OnClickListener
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_noid);											// Initializing the main activity xml
         ListView lv1 = (ListView) findViewById(R.id.list);										// Initializing the listview xml
-        lv1.setAdapter(new ItemListBaseAdapter(this,  list_details));							// Setting the listview with the adapter
+        lv1.setAdapter(new ItemListBaseAdapter(this,  list_details));	// Setting the listview with the adapter
         lv1.setItemsCanFocus(false);
+        myGoogleAnal = GoogleAnalytics.getInstance(this);
+        /* Starts the tracker using the google singleton.*/
+        myTracker = myGoogleAnal.getTracker(getString(R.string.google_analytic_id));	 		// Placeholder tracking ID from Strings XML 
     }
 
     @Override
@@ -78,6 +95,8 @@ public class TaskNOID extends Activity implements View.OnClickListener
     public void addTask(View view) {
     	/*Start the create task activity in response to the add button */
     	Intent intent = new Intent(this, CreateTaskActivity.class);
+    	/*Updates the tracker when add button is pressed*/	
+    	myTracker.sendEvent("ui_action", "button_press", "add_button_preesed", null);
     	startActivity(intent);
     }
     
