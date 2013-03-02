@@ -1,5 +1,5 @@
 /*
- * @TaskNOIDAppWidgetProvider      1.0 2013/02/27	
+ * @TaskNOIDAppWidgetProvider      1.2 2013/02/27	
  *
  * Copyright 2013 Netali & Nadav, Inc. Neatli Gur & Nadav Taoz All Rights Reserved.
  * 

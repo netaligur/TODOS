@@ -1,5 +1,5 @@
 /*
- * @CreateTaskActivity        1.0 2013/02/27	
+ * @CreateTaskActivity        1.2 2013/02/27	
  *
  * Copyright 2013 Netali & Nadav, Inc. Neatli Gur & Nadav Taoz All Rights Reserved.
  * 
@@ -304,8 +304,11 @@ public final static String EXTRA_MESSAGE2 = "com.example.todos2.CreateTaskActivi
 		/* Message for the user when the time is invalid */
 		else
 		{
+			if (!((year==0 && month==0 && day==0)||(year==0 && month==0 && day==0&&hour==0&& minute==0)))
+			{
 			Toast toast = Toast.makeText(this, "Time for Alarm had Passed,no Alarm will be set", Toast.LENGTH_SHORT);
 			toast.show();
+			}
 		}
 	}
 	/* This function is dealing with setting the location alarm with the manager*/
